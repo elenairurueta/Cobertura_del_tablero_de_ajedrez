@@ -36,7 +36,7 @@ namespace TP_LP2
 
         }
 
-        public char getChar(Pos posicion)
+        public char getCaracter(Pos posicion)
         {
             return tablero[posicion.x, posicion.y];
         }
@@ -88,5 +88,38 @@ namespace TP_LP2
             
         }
 
+        //Devuelve una lista de las posiciones vacías ("0")
+        public Pos[] getPosVacias()
+        {
+            if (esSolucion()) return null;
+
+            int contPosVacias = 0;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (tablero[i, j] == '0') contPosVacias++;
+            Pos[] posVacias = new Pos[contPosVacias];
+
+            contPosVacias = 0; Pos posAux;
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
+                    if (tablero[i, j] == '0') {
+                        posAux.x = i; posAux.y = j;
+                        posVacias[contPosVacias] = posAux;
+                    }
+            return posVacias;
+        }
+
+        //Si no recibe ninguna letra, vacía el tablero, sino elimina esa letra en la pos en el tablero
+        public void limpiarTablero(Pos pos, char letra = ' ')
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (tablero[i, j] == letra || letra == ' ')
+                        tablero[i, j] = '0';
+                }
+            }
+        }
     }
 }

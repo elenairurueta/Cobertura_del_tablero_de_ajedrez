@@ -19,7 +19,7 @@ namespace TP_LP2
         //analiza, de las mejores posiciones definidas para cada pieza, cuál es la mejor
         public abstract void colocarPieza();
 
-        //hace un conteo de las posibles amenazas de la pieza en la posición (x,y)
+        //hace un conteo de las posibles amenazas de la pieza en la posición
         public abstract int cuantasAmenaza(Pos posicion);
     }
 }

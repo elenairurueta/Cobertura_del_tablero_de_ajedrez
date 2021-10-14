@@ -111,7 +111,6 @@ namespace TP_LP2
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             } while (posAux.y > 0 && posAux.x > 0);
         }
-
         public override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0;
