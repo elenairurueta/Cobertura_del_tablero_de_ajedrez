@@ -8,10 +8,7 @@ namespace TP_LP2
 {
     class Alfil : Pieza
     {
-        public Alfil() : base('A')
-        {
-
-        }
+        public Alfil(Color color_) : base('A', color_){ }
         public override void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
@@ -21,7 +18,7 @@ namespace TP_LP2
             do
             {
                 posAux.y++; posAux.x++;
-                if (Global.tableroPiezas.getChar(posAux) != '0')
+                if (Global.tableroPiezas.getCaracter(posAux) != '0')
                     seguirFatal = false;
                 if (seguirFatal == false)
                     Global.tableroAmenazas.agregarCaracter('L', posAux);
@@ -33,7 +30,7 @@ namespace TP_LP2
             do
             {
                 posAux.y--; posAux.x++;
-                if (Global.tableroPiezas.getChar(posAux) != '0')
+                if (Global.tableroPiezas.getCaracter(posAux) != '0')
                     seguirFatal = false;
                 if (seguirFatal == false)
                     Global.tableroAmenazas.agregarCaracter('L', posAux);
@@ -45,7 +42,7 @@ namespace TP_LP2
             do
             {
                 posAux.y++; posAux.x--;
-                if (Global.tableroPiezas.getChar(posAux) != '0')
+                if (Global.tableroPiezas.getCaracter(posAux) != '0')
                     seguirFatal = false;
                 if (seguirFatal == false)
                     Global.tableroAmenazas.agregarCaracter('L', posAux);
@@ -57,12 +54,89 @@ namespace TP_LP2
             do
             {
                 posAux.y--; posAux.x--;
-                if (Global.tableroPiezas.getChar(posAux) != '0')
+                if (Global.tableroPiezas.getCaracter(posAux) != '0')
                     seguirFatal = false;
                 if (seguirFatal == false)
                     Global.tableroAmenazas.agregarCaracter('L', posAux);
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             } while (posAux.y > 0 && posAux.x > 0);
+        }
+        public override int cuantasAmenaza(Pos posicion)
+        {
+            int contAmenazas = 0; Pos posAux = posicion;
+            for (int i = 0; i < 8; i++)
+            {
+                if (posicion.x + i <= 7) {
+                    posAux.x = posicion.x + i;
+                    if (posicion.y + i <= 7)
+                    {
+                        posAux.y = posicion.y + i;
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                            contAmenazas++;
+                    }
+                    if (posicion.y - i >= 0)
+                    {
+                        posAux.y = posicion.y - i;
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                            contAmenazas++;
+                    }
+
+                }
+                if (posicion.x - i >= 0)
+                {
+                    posAux.x = posicion.x - i;
+                    if (posicion.y + i <= 7)
+                    {
+                        posAux.y = posicion.y + i;
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                            contAmenazas++;
+                    }
+                    if (posicion.y - i >= 0)
+                    {
+                        posAux.y = posicion.y - i;
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                            contAmenazas++;
+                    }
+
+                }
+            }
+            return contAmenazas;
+        }
+        public override void colocarPieza()
+        {
+            Pos[] mejoresPos = new Pos[2];
+            if (this.color == Color.NEGRO) {
+                mejoresPos[0].x = 3; mejoresPos[0].y = 3;
+                mejoresPos[1].x = 4; mejoresPos[1].y = 4;
+            }else if (this.color == Color.BLANCO)
+            {
+                mejoresPos[0].x = 3; mejoresPos[0].y = 4;
+                mejoresPos[1].x = 4; mejoresPos[1].y = 3;
+            }
+            
+            if (cuantasAmenaza(mejoresPos[0]) < cuantasAmenaza(mejoresPos[1]))
+            {
+                Pos aux = mejoresPos[0];
+                mejoresPos[0] = mejoresPos[1];
+                mejoresPos[1] = aux;
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (i > 0)
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'A'); //TODO: vaciar tablero de ataques también
+                Global.tableroPiezas.agregarCaracter('A', mejoresPos[i]);
+                if (Global.tableroAmenazas.esSolucion())
+                {
+                    for (int j = 0; j < Global.tablerosSolucion; j++)
+                    {
+                        Global.listaTablerosSolucion[Global.tablerosSolucion] = Global.tableroPiezas; //TODO: imprimir también tablero ataques?
+                        Global.tablerosSolucion++;
+                    }
+                }
+                if (Global.piezasAgregadas < 7)
+                    Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
+            }
         }
     }
 }

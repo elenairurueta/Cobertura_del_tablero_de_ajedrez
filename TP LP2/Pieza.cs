@@ -10,9 +10,10 @@ namespace TP_LP2
     abstract class Pieza
     {
         char simbolo;
-        Color color;
-        protected Pieza(char simbolo_) {
+        protected Color color; //TODO: protected??
+        protected Pieza(char simbolo_, Color color_) {
             this.simbolo = simbolo_;
+            this.color = color_;
         }
         public abstract void colorearAtaque(Pos posicion);
 
