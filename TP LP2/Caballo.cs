@@ -193,7 +193,7 @@ namespace TP_LP2
                             contAmenazas++;
                     }
                 }
-                if (posicion.y - 2 <= 7)
+                if (posicion.y - 2 >= 0)
                 {
                     if (posicion.x + 1 <= 7)
                     {
