@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace TP_LP2
 {
 
-    abstract class Pieza
+    public abstract class Pieza
     {
         char simbolo;
-        protected Color color; //TODO: protected??
+        protected Color color; //protected? no podíamos acceder sino
         protected Pieza(char simbolo_, Color color_) {
             this.simbolo = simbolo_;
             this.color = color_;

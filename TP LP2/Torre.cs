@@ -15,27 +15,33 @@ namespace TP_LP2
             bool seguirFatal = true;
 
             //Para arriba
-            do
+            if (posicion.y > 0)
             {
-                posAux.y--;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                    seguirFatal = false;
-                if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                else Global.tableroAmenazas.agregarCaracter('F', posAux);
-            } while (posAux.y > 0);
+                do
+                {
+                    posAux.y--;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.y > 0);
+            }
 
             //Para abajo
-            seguirFatal = true; posAux = posicion;
-            do
+            if (posicion.y < 7)
             {
-                posAux.y++;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                    seguirFatal = false;
-                if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                else Global.tableroAmenazas.agregarCaracter('F', posAux);
-            } while (posAux.y < 7);
+                seguirFatal = true; posAux = posicion;
+                do
+                {
+                    posAux.y++;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.y < 7);
+            }
         }
         public override int cuantasAmenaza(Pos posicion)
         {
@@ -82,13 +88,12 @@ namespace TP_LP2
                 if (i > 0)
                     Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'T'); //TODO: vaciar tablero de ataques también
                 Global.tableroPiezas.agregarCaracter('T', mejoresPos[i]);
+                colorearAtaque(mejoresPos[i]);
+
                 if (Global.tableroAmenazas.esSolucion())
                 {
-                    for (int j = 0; j < Global.tablerosSolucion; j++)
-                    {
-                        Global.listaTablerosSolucion[Global.tablerosSolucion] = Global.tableroPiezas; //TODO: imprimir también tablero ataques?
-                        Global.tablerosSolucion++;
-                    }
+                    Global.tableroPiezas.imprimirTablero();
+                    Global.tableroAmenazas.imprimirTablero();
                 }
                 if (Global.piezasAgregadas < 7)
                     Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();

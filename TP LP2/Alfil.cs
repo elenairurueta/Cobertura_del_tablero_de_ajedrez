@@ -15,51 +15,63 @@ namespace TP_LP2
             bool seguirFatal = true;
 
             //Diagonal abajo derecha
-            do
+            if (posAux.y < 7 && posAux.x < 7)
             {
-                posAux.y++; posAux.x++;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                    seguirFatal = false;
-                if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                else Global.tableroAmenazas.agregarCaracter('F', posAux);
-            } while (posAux.y < 7 && posAux.x < 7);
+                do
+                {
+                    posAux.y++; posAux.x++;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.y < 7 && posAux.x < 7);
+            }
 
             //Diagonal arriba derecha
-            seguirFatal = true; posAux = posicion;
-            do
+            if (posAux.y > 0 && posAux.x < 7)
             {
-                posAux.y--; posAux.x++;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                    seguirFatal = false;
-                if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                else Global.tableroAmenazas.agregarCaracter('F', posAux);
-            } while (posAux.y > 0 && posAux.x < 7);
+                seguirFatal = true; posAux = posicion;
+                do
+                {
+                    posAux.y--; posAux.x++;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.y > 0 && posAux.x < 7);
+            }
 
             //Diagonal abajo izquierda
-            seguirFatal = true; posAux = posicion;
-            do
+            if (posAux.y < 7 && posAux.x > 0)
             {
-                posAux.y++; posAux.x--;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                    seguirFatal = false;
-                if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                else Global.tableroAmenazas.agregarCaracter('F', posAux);
-            } while (posAux.y < 7 && posAux.x > 0);
+                seguirFatal = true; posAux = posicion;
+                do
+                {
+                    posAux.y++; posAux.x--;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.y < 7 && posAux.x > 0);
+            }
 
             //Diagonal arriba izquierda
-            seguirFatal = true; posAux = posicion;
-            do
+            if (posAux.y > 0 && posAux.x > 0)
             {
-                posAux.y--; posAux.x--;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                    seguirFatal = false;
-                if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                else Global.tableroAmenazas.agregarCaracter('F', posAux);
-            } while (posAux.y > 0 && posAux.x > 0);
+                seguirFatal = true; posAux = posicion;
+                do
+                {
+                    posAux.y--; posAux.x--;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.y > 0 && posAux.x > 0);
+            }
         }
         public override int cuantasAmenaza(Pos posicion)
         {
@@ -126,13 +138,12 @@ namespace TP_LP2
                 if (i > 0)
                     Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'A'); //TODO: vaciar tablero de ataques también
                 Global.tableroPiezas.agregarCaracter('A', mejoresPos[i]);
+                colorearAtaque(mejoresPos[i]);
+
                 if (Global.tableroAmenazas.esSolucion())
                 {
-                    for (int j = 0; j < Global.tablerosSolucion; j++)
-                    {
-                        Global.listaTablerosSolucion[Global.tablerosSolucion] = Global.tableroPiezas; //TODO: imprimir también tablero ataques?
-                        Global.tablerosSolucion++;
-                    }
+                    Global.tableroPiezas.imprimirTablero();
+                    Global.tableroAmenazas.imprimirTablero();
                 }
                 if (Global.piezasAgregadas < 7)
                     Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();

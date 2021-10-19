@@ -18,21 +18,26 @@ namespace TP_LP2
             /* Si puede colocar el símbolo (no hay otra pieza) al tablero en la posición, 
 			devuelve true. En el caso en que en esa posición hubiere una Torre ("T") y se
 			quiera agregar el rey ("K") se pueden apilar y colocar una "X" */
-            if (tablero[posicion.x, posicion.y] == '0')
+            if (posicion.x < 7 && posicion.x > 0 && posicion.y < 7 && posicion.y > 0)
             {
-                tablero[posicion.x, posicion.y] = simbolo;
+
+                if (tablero[posicion.x, posicion.y] == '0')
+                {
+                    tablero[posicion.x, posicion.y] = simbolo;
+                }
+                else if (tablero[posicion.x, posicion.y] == 'T' && simbolo == 'K')
+                {
+                    tablero[posicion.x, posicion.y] = 'X';
+                }
+                else if (tablero[posicion.x, posicion.y] == 'K' && simbolo == 'T')
+                {
+                    tablero[posicion.x, posicion.y] = 'X';
+                }
+                else
+                    return false;
+                return true;
             }
-            else if (tablero[posicion.x, posicion.y] == 'T' && simbolo == 'K')
-            {
-                tablero[posicion.x, posicion.y] = 'X';
-            }
-            else if (tablero[posicion.x, posicion.y] == 'K' && simbolo == 'T')
-            {
-                tablero[posicion.x, posicion.y] = 'X';
-            }
-            else
-                return false;
-            return true;
+            else return false;
 
         }
 
@@ -52,11 +57,15 @@ namespace TP_LP2
                         return false;
                 }
             }
+            Tablero tableroAgregar = new Tablero();
+            tableroAgregar = Global.tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
+            Global.listaTablerosSolucion[Global.tablerosSolucion] = tableroAgregar;
+            Global.tablerosSolucion++;
             return true;
         }
 
         //imprime tableroPiezas
-        public void imprimirTableroPiezas()
+        public void imprimirTablero()
         {
             for (int j = 0; j < 8; j++)
             {
@@ -64,28 +73,6 @@ namespace TP_LP2
                     Console.WriteLine(tablero[j,i]);
                 Console.WriteLine("\n");
             }
-        }
-
-        //imprime los ataques leve y fatal, superponiendo tableroAmenazas y tableroPiezas.
-        public void imprimirTableroAtaques()
-        {
-            /*Recorremos cada pieza en listaPiezas desde 0 hasta piezasAgregadas.
-			La buscamos en el tableroPiezas y recorremos todos los casilleros que esta ataca
-			pintándolos de rojo (ataque fatal). Si en el camino nos encontramos con otra pieza, 
-			marcamos en amarillo (ataque leve) todos los casilleros restantes de ese ataque.*/
-            for (int j = 0; j < 8; j++)
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    if(Global.tableroPiezas.tablero[i,j] != '0')
-                    {
-                        if (Global.tableroPiezas.tablero[i, j] == 'T')
-                            Torre.colorearAtaque();
-                    }
-
-            }
-            }
-            
         }
 
         //Devuelve una lista de las posiciones vacías ("0")

@@ -26,14 +26,14 @@ namespace TP_LP2
     public class Global
     {
         public static Pieza[] listaPiezas = new Pieza[8]{
-                                                            new Reina(),
-                                                            new Torre(),
-                                                            new Torre(),
-                                                            new Alfil(),
-                                                            new Alfil(),
-                                                            new Caballo(),
-                                                            new Caballo(),
-                                                            new Rey()
+                                                            new Reina(Color.BLANCO),
+                                                            new Torre(Color.BLANCO),
+                                                            new Torre(Color.NEGRO),
+                                                            new Alfil(Color.BLANCO),
+                                                            new Alfil(Color.NEGRO),
+                                                            new Caballo(Color.BLANCO),
+                                                            new Caballo(Color.NEGRO),
+                                                            new Rey(Color.BLANCO)
                                                         };
         public static int piezasAgregadas = 0;
         public static Tablero tableroAmenazas = new Tablero();
