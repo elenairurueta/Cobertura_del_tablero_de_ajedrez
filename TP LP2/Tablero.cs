@@ -12,7 +12,7 @@ namespace TP_LP2
     
     public class Tablero
     {
-        private char[,] tablero = new char[8, 8]; //no liberar memoria
+        private char[,] tablero = new char[8, 8];
         public bool agregarCaracter(char simbolo, Pos posicion)
         {
             /* Si puede colocar el símbolo (no hay otra pieza) al tablero en la posición, 
@@ -40,7 +40,6 @@ namespace TP_LP2
             else return false;
 
         }
-
         public char getCaracter(Pos posicion)
         {
             return tablero[posicion.x, posicion.y];
@@ -59,7 +58,8 @@ namespace TP_LP2
             }
             Tablero tableroAgregar = new Tablero();
             tableroAgregar = Global.tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
-            Global.listaTablerosSolucion[Global.tablerosSolucion] = tableroAgregar;
+
+            Global.listaTablerosSolucion.Append(tableroAgregar).ToArray();
             Global.tablerosSolucion++;
             return true;
         }
@@ -100,6 +100,7 @@ namespace TP_LP2
                     if (tablero[i, j] == '0') contPosVacias++;
             return contPosVacias;
         }
+
         //Si no recibe ninguna letra, vacía el tablero, sino elimina esa letra en la pos en el tablero
         public void limpiarTablero(Pos pos, char letra = ' ')
         {

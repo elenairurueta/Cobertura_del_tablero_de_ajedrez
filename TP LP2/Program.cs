@@ -18,6 +18,7 @@ namespace TP_LP2
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1()); 
             //TODO: descomentar
+            
             Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
         }
     }
