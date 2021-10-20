@@ -9,7 +9,7 @@ namespace TP_LP2
     class Alfil : Pieza
     {
         public Alfil(Color color_) : base('A', color_){ }
-        public override void colorearAtaque(Pos posicion)
+        public static void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
             bool seguirFatal = true;
@@ -23,7 +23,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x < 7);
             }
@@ -39,7 +40,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x < 7);
             }
@@ -55,7 +57,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x > 0);
             }
@@ -71,7 +74,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x > 0);
             }
@@ -139,10 +143,13 @@ namespace TP_LP2
             for (int i = 0; i < 2; i++)
             {
                 if (i > 0)
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'A'); //TODO: vaciar tablero de ataques también
+                {
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'A');
+                    Global.piezasAgregadas--;
+                }
                 if (Global.tableroPiezas.agregarCaracter('A', mejoresPos[i]))
                 {
-                    colorearAtaque(mejoresPos[i]);
+                    actualizarAmenazas();
 
                     if (Global.tableroAmenazas.esSolucion())
                     {

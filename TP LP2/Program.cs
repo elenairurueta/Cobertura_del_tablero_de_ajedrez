@@ -25,7 +25,7 @@ namespace TP_LP2
     public class Global
     {
         public static Pieza[] listaPiezas = new Pieza[8]{
-                                                            new Reina(Color.BLANCO),
+                                                            new Reina(Color.NEGRO),
                                                             new Torre(Color.BLANCO),
                                                             new Torre(Color.NEGRO),
                                                             new Alfil(Color.BLANCO),

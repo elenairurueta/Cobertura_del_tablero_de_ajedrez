@@ -9,7 +9,7 @@ namespace TP_LP2
     class Reina : Pieza
     {
         public Reina(Color color_) : base('R', color_){ }
-        public override void colorearAtaque(Pos posicion)
+        public static void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
             //Para arriba
@@ -22,7 +22,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y > 0);
             }
@@ -38,7 +39,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y < 7);
             }
@@ -54,7 +56,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.x < 7);
             }
@@ -70,7 +73,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.x > 0);
             }
@@ -86,7 +90,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x < 7);
             }
@@ -101,7 +106,8 @@ namespace TP_LP2
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                     seguirFatal = false;
                 if (seguirFatal == false)
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             } while (posAux.y > 0 && posAux.x < 7); }
 
@@ -116,7 +122,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x > 0);
             }
@@ -132,7 +139,8 @@ namespace TP_LP2
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
                         seguirFatal = false;
                     if (seguirFatal == false)
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x > 0);
             }
@@ -213,10 +221,13 @@ namespace TP_LP2
             for (int i = 0; i < 4; i++)
             {
                 if (i > 0)
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1]); //TODO: vaciar tablero de ataques también
+                {
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1]);
+                    Global.piezasAgregadas--;
+                }
                 if (Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]))
                 {
-                    colorearAtaque(mejoresPos[i]);
+                    actualizarAmenazas();
 
                     if (Global.tableroAmenazas.esSolucion())
                     {

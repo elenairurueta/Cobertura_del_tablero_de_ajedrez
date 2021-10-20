@@ -9,7 +9,7 @@ namespace TP_LP2
     class Caballo : Pieza
     {
         public Caballo(Color color_) : base('C', color_) { }
-        public override void colorearAtaque(Pos posicion)
+        public static void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
             //Para arriba
@@ -22,12 +22,14 @@ namespace TP_LP2
                     if (posAux.x < 7)
                     {
                         posAux.x++;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                     if (posAux.x > 1)
                     {
                         posAux.x -= 2;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
 
                 }
@@ -39,12 +41,14 @@ namespace TP_LP2
                         if (posAux.x < 7)
                         {
                             posAux.x++;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                         if (posAux.x > 1)
                         {
                             posAux.x -= 2;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                     }
                     else
@@ -75,12 +79,14 @@ namespace TP_LP2
                     if (posAux.x < 7)
                     {
                         posAux.x++;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                     if (posAux.x > 1)
                     {
                         posAux.x -= 2;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                 }
                 else
@@ -91,12 +97,14 @@ namespace TP_LP2
                         if (posAux.x < 7)
                         {
                             posAux.x++;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                         if (posAux.x > 1)
                         {
                             posAux.x -= 2;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                     }
                     else
@@ -127,12 +135,14 @@ namespace TP_LP2
                     if (posAux.y < 7)
                     {
                         posAux.y++;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                     if (posAux.y > 1)
                     {
                         posAux.y -= 2;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                 }
                 else
@@ -143,12 +153,14 @@ namespace TP_LP2
                         if (posAux.y < 7)
                         {
                             posAux.y++;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                         if (posAux.y > 1)
                         {
                             posAux.y -= 2;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                     }
                     else
@@ -179,12 +191,14 @@ namespace TP_LP2
                     if (posAux.y < 7)
                     {
                         posAux.y++;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                     if (posAux.y > 1)
                     {
                         posAux.y -= 2;
-                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
                     }
                 }
                 else
@@ -195,12 +209,14 @@ namespace TP_LP2
                         if (posAux.y < 7)
                         {
                             posAux.y++;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                         if (posAux.y > 1)
                         {
                             posAux.y -= 2;
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                                Global.tableroAmenazas.agregarCaracter('L', posAux);
                         }
                     }
                     else
@@ -320,10 +336,15 @@ namespace TP_LP2
             }
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (i > 0) Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'C');
+                if (i > 0)
+                {
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'C');
+                    Global.piezasAgregadas--;
+                    // actualizarAmenazas(); acá?
+                }
                 if (Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]))
                 {
-                    colorearAtaque(mejoresPos[i]);
+                    actualizarAmenazas();
 
                     if (Global.tableroAmenazas.esSolucion())
                     {
