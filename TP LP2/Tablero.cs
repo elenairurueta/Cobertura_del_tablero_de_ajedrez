@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace TP_LP2
 {
-
-    
-
-    
     public class Tablero
     {
         private char[,] tablero = new char[8, 8];
+
+        public Tablero()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    this.tablero[i, j] = '0';
+                }
+            }
+        }
         public bool agregarCaracter(char simbolo, Pos posicion)
         {
             /* Si puede colocar el símbolo (no hay otra pieza) al tablero en la posición, 
 			devuelve true. En el caso en que en esa posición hubiere una Torre ("T") y se
 			quiera agregar el rey ("K") se pueden apilar y colocar una "X" */
-            if (posicion.x < 7 && posicion.x > 0 && posicion.y < 7 && posicion.y > 0)
+            if (posicion.x <= 7 && posicion.x >= 0 && posicion.y <= 7 && posicion.y >= 0)
             {
 
                 if (tablero[posicion.x, posicion.y] == '0')
@@ -70,7 +77,7 @@ namespace TP_LP2
             for (int j = 0; j < 8; j++)
             {
                 for (int i = 0; i < 8; i++)
-                    Console.WriteLine(tablero[j,i]);
+                    Console.Write(tablero[j,i] + " ");
                 Console.WriteLine("\n");
             }
         }

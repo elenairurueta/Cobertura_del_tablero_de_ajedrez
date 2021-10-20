@@ -28,9 +28,10 @@ namespace TP_LP2
             }
 
             //Para abajo
+            posAux = posicion;
             if (posAux.y < 7)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true;
                 do
                 {
                     posAux.y++;
@@ -43,9 +44,10 @@ namespace TP_LP2
             }
 
             //Para la derecha
+            posAux = posicion;
             if (posAux.x < 7)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true;
                 do
                 {
                     posAux.x++;
@@ -58,9 +60,10 @@ namespace TP_LP2
             }
 
             //Para la izquierda
+            posAux = posicion;
             if (posAux.x > 0)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true;
                 do
                 {
                     posAux.x--;
@@ -73,9 +76,10 @@ namespace TP_LP2
             }
 
             //Diagonal abajo derecha
+            posAux = posicion;
             if (posAux.y < 7 && posAux.x < 7)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true; 
                 do
                 {
                     posAux.y++; posAux.x++;
@@ -88,8 +92,9 @@ namespace TP_LP2
             }
 
             //Diagonal arriba derecha
+            posAux = posicion;
             if (posAux.y > 0 && posAux.x < 7) { 
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true;
             do
             {
                 posAux.y--; posAux.x++;
@@ -101,9 +106,10 @@ namespace TP_LP2
             } while (posAux.y > 0 && posAux.x < 7); }
 
             //Diagonal abajo izquierda
+            posAux = posicion;
             if (posAux.y < 7 && posAux.x > 0)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true;
                 do
                 {
                     posAux.y++; posAux.x--;
@@ -116,9 +122,10 @@ namespace TP_LP2
             }
 
             //Diagonal arriba izquierda
+            posAux = posicion;
             if (posAux.y > 0 && posAux.x > 0)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true;
                 do
                 {
                     posAux.y--; posAux.x--;
@@ -207,16 +214,18 @@ namespace TP_LP2
             {
                 if (i > 0)
                     Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1]); //TODO: vaciar tablero de ataques también
-                Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]);
-                colorearAtaque(mejoresPos[i]);
-
-                if (Global.tableroAmenazas.esSolucion())
+                if (Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]))
                 {
-                    Global.tableroPiezas.imprimirTablero();
-                    Global.tableroAmenazas.imprimirTablero();
+                    colorearAtaque(mejoresPos[i]);
+
+                    if (Global.tableroAmenazas.esSolucion())
+                    {
+                        Global.tableroPiezas.imprimirTablero();
+                        Global.tableroAmenazas.imprimirTablero();
+                    }
+                    if (Global.piezasAgregadas < 7)
+                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                 }
-                if (Global.piezasAgregadas < 7)
-                    Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
             }
         }
     }

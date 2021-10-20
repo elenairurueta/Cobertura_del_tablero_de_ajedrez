@@ -13,167 +13,211 @@ namespace TP_LP2
         {
             Pos posAux = posicion;
             //Para arriba
-
-            posAux.y--;
-            if (Global.tableroPiezas.getCaracter(posAux) != '0')
+            if (posAux.y > 1)
             {
-
-                posAux.y--;
-
-                posAux.x++;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-
-                posAux.x -= 2;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-
-            }
-            else
-            {
-                Global.tableroAmenazas.agregarCaracter('F', posAux);
-
                 posAux.y--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-
-                    posAux.x++;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-
-                    posAux.x -= 2;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    posAux.y--;
+                    if (posAux.x < 7)
+                    {
+                        posAux.x++;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
+                    if (posAux.x > 1)
+                    {
+                        posAux.x -= 2;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
 
                 }
                 else
                 {
-                    Global.tableroAmenazas.agregarCaracter('F', posAux);
-
-                    posAux.x++;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
-
-
-                    posAux.x -= 2;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
-
+                    posAux.y--;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
+                        if (posAux.x < 7)
+                        {
+                            posAux.x++;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                        if (posAux.x > 1)
+                        {
+                            posAux.x -= 2;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                    }
+                    else
+                    {
+                        if (posAux.x < 7)
+                        {
+                            posAux.x++;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                        if (posAux.x > 1)
+                        {
+                            posAux.x -= 2;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                    }
                 }
             }
-
             //Para abajo
-
-            posAux.y++;
-            if (Global.tableroPiezas.getCaracter(posAux) != '0')
+            posAux = posicion;
+            if (posAux.y < 6)
             {
-
                 posAux.y++;
-
-                posAux.x++;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-
-                posAux.x -= 2;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-
-            }
-            else
-            {
-                Global.tableroAmenazas.agregarCaracter('F', posAux);
-
-                posAux.y++;
-                if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                {
-
-                    posAux.x++;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-
-                    posAux.x -= 2;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-                }
-                else
-                {
-                    Global.tableroAmenazas.agregarCaracter('F', posAux);
-
-                    posAux.x++;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
-
-
-                    posAux.x -= 2;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
-                }
-            }
-
-            //Para derecha
-
-            posAux.x++;
-            if (Global.tableroPiezas.getCaracter(posAux) != '0')
-            {
-                posAux.x++;
-                posAux.y++;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-                posAux.y -= 2;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-
-            }
-            else
-            {
-                Global.tableroAmenazas.agregarCaracter('F', posAux);
-                posAux.x++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
                     posAux.y++;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                    posAux.y -= 2;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    if (posAux.x < 7)
+                    {
+                        posAux.x++;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
+                    if (posAux.x > 1)
+                    {
+                        posAux.x -= 2;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
                 }
                 else
                 {
-                    Global.tableroAmenazas.agregarCaracter('F', posAux);
-                    posAux.x++;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
-                    posAux.x -= 2;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    posAux.y++;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
+                        if (posAux.x < 7)
+                        {
+                            posAux.x++;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                        if (posAux.x > 1)
+                        {
+                            posAux.x -= 2;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                    }
+                    else
+                    {
+                        if (posAux.x < 7)
+                        {
+                            posAux.x++;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                        if (posAux.x > 1)
+                        {
+                            posAux.x -= 2;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                    }
                 }
             }
-
+            //Para derecha 
+            posAux = posicion;
+            if (posAux.x < 6)
+            {
+                posAux.x++;
+                if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
+                    posAux.x++;
+                    if (posAux.y < 7)
+                    {
+                        posAux.y++;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
+                    if (posAux.y > 1)
+                    {
+                        posAux.y -= 2;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
+                }
+                else
+                {
+                    posAux.x++;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
+                        if (posAux.y < 7)
+                        {
+                            posAux.y++;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                        if (posAux.y > 1)
+                        {
+                            posAux.y -= 2;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                    }
+                    else
+                    {
+                        if (posAux.y < 7)
+                        {
+                            posAux.y++;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                        if (posAux.y > 1)
+                        {
+                            posAux.y -= 2;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                    }
+                }
+            }
             //Para izquierda
-            posAux.x--;
-            if (Global.tableroPiezas.getCaracter(posAux) != '0')
+            posAux = posicion;
+            if (posAux.x > 1)
             {
-                posAux.x--;
-                posAux.y++;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-                posAux.y -= 2;
-                Global.tableroAmenazas.agregarCaracter('L', posAux);
-            }
-            else
-            {
-                Global.tableroAmenazas.agregarCaracter('F', posAux);
                 posAux.x--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    posAux.y++;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
-                    posAux.y -= 2;
-                    Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    posAux.x--;
+                    if (posAux.y < 7)
+                    {
+                        posAux.y++;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
+                    if (posAux.y > 1)
+                    {
+                        posAux.y -= 2;
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    }
                 }
                 else
                 {
-                    Global.tableroAmenazas.agregarCaracter('F', posAux);
-                    posAux.x++;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
-                    posAux.x -= 2;
-                    if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                        Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    posAux.x--;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
+                        if (posAux.y < 7)
+                        {
+                            posAux.y++;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                        if (posAux.y > 1)
+                        {
+                            posAux.y -= 2;
+                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                        }
+                    }
+                    else
+                    {
+                        if (posAux.y < 7)
+                        {
+                            posAux.y++;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                        if (posAux.y > 1)
+                        {
+                            posAux.y -= 2;
+                            if (Global.tableroPiezas.getCaracter(posAux) == '0')
+                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                        }
+                    }
                 }
             }
         }
@@ -249,10 +293,12 @@ namespace TP_LP2
         {
             Pos[] atacarPos = Global.tableroAmenazas.getPosVacias();
 
-            Pos[] mejoresPos = new Pos[] { };
+            Pos[] mejoresPos = new Pos[] { }; 
+            Pos[] auxiliar;
             for (int i = 0; i < Global.tableroAmenazas.getCantPosVacias(); i++)
             {
-                mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
+                auxiliar = dondeColocarParaAtacar(atacarPos[i]);
+                mejoresPos = mejoresPos.Concat(auxiliar).ToArray();
             }
 
             int contCambios;
@@ -275,16 +321,18 @@ namespace TP_LP2
             for (int i = 0; i < mejoresPos.Length; i++)
             {
                 if (i > 0) Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'C');
-                Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]);
-                colorearAtaque(mejoresPos[i]);
-
-                if (Global.tableroAmenazas.esSolucion())
+                if (Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]))
                 {
-                    Global.tableroPiezas.imprimirTablero();
-                    Global.tableroAmenazas.imprimirTablero();
+                    colorearAtaque(mejoresPos[i]);
+
+                    if (Global.tableroAmenazas.esSolucion())
+                    {
+                        Global.tableroPiezas.imprimirTablero();
+                        Global.tableroAmenazas.imprimirTablero();
+                    }
+                    if (Global.piezasAgregadas < 7)
+                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                 }
-                if (Global.piezasAgregadas < 7)
-                    Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
             }
         }
         private Pos[] dondeColocarParaAtacar(Pos posAtacar)
@@ -381,7 +429,10 @@ namespace TP_LP2
                 }
             }
 
-            return dondeColocar;
+            Pos[] ResizedArray = new Pos[cantAgregadas];
+            for (int i = 0; i < cantAgregadas; i++)
+                ResizedArray[i] = dondeColocar[i];
+            return ResizedArray;
         }
     }
 }

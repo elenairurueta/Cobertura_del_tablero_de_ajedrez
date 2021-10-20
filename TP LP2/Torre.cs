@@ -29,9 +29,10 @@ namespace TP_LP2
             }
 
             //Para abajo
+            posAux = posicion;
             if (posicion.y < 7)
             {
-                seguirFatal = true; posAux = posicion;
+                seguirFatal = true; 
                 do
                 {
                     posAux.y++;
@@ -41,6 +42,38 @@ namespace TP_LP2
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
                     else Global.tableroAmenazas.agregarCaracter('F', posAux);
                 } while (posAux.y < 7);
+            }
+
+            //Para derecha
+            posAux = posicion;
+            if (posicion.x < 7)
+            {
+                seguirFatal = true;
+                do
+                {
+                    posAux.x++;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.x < 7);
+            }
+
+            //Para izquierda
+            posAux = posicion;
+            if (posicion.x > 0)
+            {
+                seguirFatal = true;
+                do
+                {
+                    posAux.x--;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                        seguirFatal = false;
+                    if (seguirFatal == false)
+                        Global.tableroAmenazas.agregarCaracter('L', posAux);
+                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                } while (posAux.x > 0);
             }
         }
         public override int cuantasAmenaza(Pos posicion)
@@ -87,16 +120,18 @@ namespace TP_LP2
             {
                 if (i > 0)
                     Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'T'); //TODO: vaciar tablero de ataques también
-                Global.tableroPiezas.agregarCaracter('T', mejoresPos[i]);
-                colorearAtaque(mejoresPos[i]);
-
-                if (Global.tableroAmenazas.esSolucion())
+                if (Global.tableroPiezas.agregarCaracter('T', mejoresPos[i]))
                 {
-                    Global.tableroPiezas.imprimirTablero();
-                    Global.tableroAmenazas.imprimirTablero();
+                    colorearAtaque(mejoresPos[i]);
+
+                    if (Global.tableroAmenazas.esSolucion())
+                    {
+                        Global.tableroPiezas.imprimirTablero();
+                        Global.tableroAmenazas.imprimirTablero();
+                    }
+                    if (Global.piezasAgregadas < 7)
+                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                 }
-                if (Global.piezasAgregadas < 7)
-                    Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
             }
         }
     }

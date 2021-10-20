@@ -147,16 +147,18 @@ namespace TP_LP2
             for (int i = 0; i < mejoresPos.Length; i++)
             {
                 if (i > 0) Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'K');
-                Global.tableroPiezas.agregarCaracter('K', mejoresPos[i]);
-                colorearAtaque(mejoresPos[i]);
-
-                if (Global.tableroAmenazas.esSolucion())
+                if (Global.tableroPiezas.agregarCaracter('K', mejoresPos[i]))
                 {
-                    Global.tableroPiezas.imprimirTablero();
-                    Global.tableroAmenazas.imprimirTablero();
+                    colorearAtaque(mejoresPos[i]);
+
+                    if (Global.tableroAmenazas.esSolucion())
+                    {
+                        Global.tableroPiezas.imprimirTablero();
+                        Global.tableroAmenazas.imprimirTablero();
+                    }
+                    if (Global.piezasAgregadas < 7)
+                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                 }
-                if (Global.piezasAgregadas < 7)
-                    Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
             }
         }
         private Pos[] dondeColocarParaAtacar(Pos posAtacar)

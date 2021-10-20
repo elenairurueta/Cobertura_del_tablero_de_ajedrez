@@ -22,4 +22,30 @@ namespace TP_LP2
             Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
         }
     }
+    public class Global
+    {
+        public static Pieza[] listaPiezas = new Pieza[8]{
+                                                            new Reina(Color.BLANCO),
+                                                            new Torre(Color.BLANCO),
+                                                            new Torre(Color.NEGRO),
+                                                            new Alfil(Color.BLANCO),
+                                                            new Alfil(Color.NEGRO),
+                                                            new Caballo(Color.BLANCO),
+                                                            new Caballo(Color.NEGRO),
+                                                            new Rey(Color.BLANCO)
+                                                        };
+        public static int piezasAgregadas = 0;
+        public static Tablero tableroAmenazas = new Tablero();
+        public static Tablero tableroPiezas = new Tablero();
+        public const int TABLEROSMAX = 10;
+        public static Tablero[] listaTablerosSolucion = new Tablero[TABLEROSMAX];
+        public static int tablerosSolucion = 0;
+
+    }
+    public struct Pos
+    {
+        public int x;
+        public int y;
+    }
+    public enum Color { BLANCO, NEGRO };
 }
