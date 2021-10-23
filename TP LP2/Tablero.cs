@@ -9,16 +9,11 @@ namespace TP_LP2
     public class Tablero
     {
         private char[,] tablero = new char[8, 8];
-
+        private static Tablero[] listaTablerosSolucion = new Tablero[] { };
+        public static int tablerosSolucion = 0;
         public Tablero()
         {
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    this.tablero[i, j] = '0';
-                }
-            }
+            vaciarTablero();
         }
         public bool agregarCaracter(char simbolo, Pos posicion)
         {
@@ -66,11 +61,39 @@ namespace TP_LP2
             Tablero tableroAgregar = new Tablero();
             tableroAgregar = Global.tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
 
-            Global.listaTablerosSolucion.Append(tableroAgregar).ToArray();
-            Global.tablerosSolucion++;
+            if (!tableroAgregar.yaSeEncuentraEnLista())
+            {
+                listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
+                tablerosSolucion++;
+                Global.tableroPiezas.imprimirTablero();
+                Global.tableroAmenazas.imprimirTablero();
+            }
             return true;
         }
+        public bool yaSeEncuentraEnLista()
+        {
+            bool igual = true;
+            for (int i = 0; i < tablerosSolucion; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        if (tablero[j, k] != listaTablerosSolucion[i].tablero[j, k])
+                        {
+                            igual = false;
+                            break;
+                        }
+                    }
+                    if (!igual)
+                        break;
+                }
+                if (igual)
+                    return true;
+            }
+            return false;
 
+        }
         //imprime tableroPiezas
         public void imprimirTablero()
         {
@@ -121,7 +144,15 @@ namespace TP_LP2
                 }
             }
         }
-
-        
+        public void vaciarTablero()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    tablero[i, j] = '0';
+                }
+            }
+        }
     }
 }

@@ -38,8 +38,6 @@ namespace TP_LP2
         public static Tablero tableroAmenazas = new Tablero();
         public static Tablero tableroPiezas = new Tablero();
         public const int TABLEROSMAX = 10;
-        public static Tablero[] listaTablerosSolucion = new Tablero[TABLEROSMAX];
-        public static int tablerosSolucion = 0;
 
     }
     public struct Pos

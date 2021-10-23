@@ -30,7 +30,7 @@ namespace TP_LP2
                 for (int j = 0; j < 8; j++)
                 {
                     posicion.x = i; posicion.y = j;
-                    Global.tableroAmenazas.agregarCaracter('0', posicion);
+                    Global.tableroAmenazas.vaciarTablero();
                 }
             }
             for (int i = 0; i < 8; i++)

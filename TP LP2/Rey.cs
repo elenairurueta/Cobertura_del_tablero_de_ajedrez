@@ -16,16 +16,20 @@ namespace TP_LP2
             {
                 posAux.x++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.y < 7)
             {
                 posAux.y++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.y < 7)
@@ -33,16 +37,20 @@ namespace TP_LP2
                 posAux = posicion;
                 posAux.y++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.x > 0)
             {
                 posAux.x--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.x > 0)
@@ -50,16 +58,20 @@ namespace TP_LP2
                 posAux = posicion;
                 posAux.x--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.y > 0)
             {
                 posAux.y--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.y > 0)
@@ -67,16 +79,20 @@ namespace TP_LP2
                 posAux = posicion;
                 posAux.y--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
             if (posicion.x < 7)
             {
                 posAux.x++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                {
                     if (Global.tableroPiezas.getCaracter(posAux) != 'F')
                         Global.tableroAmenazas.agregarCaracter('L', posAux);
+                }
                 else Global.tableroAmenazas.agregarCaracter('F', posAux);
             }
         }
@@ -132,8 +148,9 @@ namespace TP_LP2
 
             for (int i = 0; i < Global.tableroAmenazas.getCantPosVacias(); i++)
             {
-                mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
+                mejoresPos = mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
             }
+            //Para la próxima entrega: sacar posiciones repetidas porque prueba lo mismo 2 veces
 
             int contCambios;
             for (int i = 0; i < mejoresPos.Length; i++)
@@ -152,26 +169,23 @@ namespace TP_LP2
                 if (contCambios == 0)
                     break;
             }
+
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (i > 0)
-                {
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'K');
-                    Global.piezasAgregadas--;
-                }
                 if (Global.tableroPiezas.agregarCaracter('K', mejoresPos[i]))
                 {
                     actualizarAmenazas();
 
-                    if (Global.tableroAmenazas.esSolucion())
+                    Global.tableroAmenazas.esSolucion();
+
+                    if (Global.piezasAgregadas < 8)
                     {
-                        Global.tableroPiezas.imprimirTablero();
-                        Global.tableroAmenazas.imprimirTablero();
-                    }
-                    if (Global.piezasAgregadas < 7)
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
+                    }
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], 'K');
                 }
             }
+            Global.piezasAgregadas--;
         }
         private Pos[] dondeColocarParaAtacar(Pos posAtacar)
         {
@@ -222,7 +236,7 @@ namespace TP_LP2
                 dondeColocar[cantAgregadas].x = posAtacar.x;
                 cantAgregadas++;
             }
-            if (posAtacar.y + 1 >= 0)
+            if (posAtacar.y + 1 <= 7)
             {
                 dondeColocar[cantAgregadas].y = posAtacar.y + 1;
                 dondeColocar[cantAgregadas].x = posAtacar.x;
@@ -230,6 +244,6 @@ namespace TP_LP2
             }
             
             return dondeColocar;
-        }
+        } 
     }
 }

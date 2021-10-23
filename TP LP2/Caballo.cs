@@ -316,7 +316,7 @@ namespace TP_LP2
                 auxiliar = dondeColocarParaAtacar(atacarPos[i]);
                 mejoresPos = mejoresPos.Concat(auxiliar).ToArray();
             }
-
+            //TODO: sacar posiciones repetidas
             int contCambios;
             for (int i = 0; i < mejoresPos.Length; i++)
             {
@@ -334,27 +334,23 @@ namespace TP_LP2
                 if (contCambios == 0)
                     break;
             }
+
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (i > 0)
-                {
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i - 1], 'C');
-                    Global.piezasAgregadas--;
-                    // actualizarAmenazas(); acá?
-                }
                 if (Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]))
                 {
                     actualizarAmenazas();
 
-                    if (Global.tableroAmenazas.esSolucion())
+                    Global.tableroAmenazas.esSolucion();
+
+                    if (Global.piezasAgregadas < 8)
                     {
-                        Global.tableroPiezas.imprimirTablero();
-                        Global.tableroAmenazas.imprimirTablero();
-                    }
-                    if (Global.piezasAgregadas < 7)
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
+                    }
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], 'C');
                 }
             }
+            Global.piezasAgregadas--;
         }
         private Pos[] dondeColocarParaAtacar(Pos posAtacar)
         {
