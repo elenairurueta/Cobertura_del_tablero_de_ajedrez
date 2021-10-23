@@ -150,7 +150,7 @@ namespace TP_LP2
             {
                 mejoresPos = mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
             }
-            //Para la próxima entrega: sacar posiciones repetidas porque prueba lo mismo 2 veces
+            Global.sacarPosRepetidas(mejoresPos);
 
             int contCambios;
             for (int i = 0; i < mejoresPos.Length; i++)
@@ -169,6 +169,7 @@ namespace TP_LP2
                 if (contCambios == 0)
                     break;
             }
+
 
             for (int i = 0; i < mejoresPos.Length; i++)
             {

@@ -38,6 +38,10 @@ namespace TP_LP2
         public static Tablero tableroAmenazas = new Tablero();
         public static Tablero tableroPiezas = new Tablero();
         public const int TABLEROSMAX = 10;
+        public static void sacarPosRepetidas(Pos[] arrayPos)
+        {
+            arrayPos = arrayPos.Distinct().ToArray();
+        }
 
     }
     public struct Pos

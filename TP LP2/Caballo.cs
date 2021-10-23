@@ -316,7 +316,8 @@ namespace TP_LP2
                 auxiliar = dondeColocarParaAtacar(atacarPos[i]);
                 mejoresPos = mejoresPos.Concat(auxiliar).ToArray();
             }
-            //TODO: sacar posiciones repetidas
+            Global.sacarPosRepetidas(mejoresPos);
+
             int contCambios;
             for (int i = 0; i < mejoresPos.Length; i++)
             {
