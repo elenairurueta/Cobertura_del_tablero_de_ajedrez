@@ -10,7 +10,7 @@ namespace TP_LP2
     public abstract class Pieza
     {
         char simbolo;
-        protected Color color; //protected? no podíamos acceder sino
+        protected Color color;
         protected Pieza(char simbolo_, Color color_) {
             this.simbolo = simbolo_;
             this.color = color_;
@@ -22,6 +22,7 @@ namespace TP_LP2
         //hace un conteo de las posibles amenazas de la pieza en la posición
         public abstract int cuantasAmenaza(Pos posicion);
 
+        //vacía el tablero y llama a colorearAtaque() de todas las piezas ya colocadas
         protected void actualizarAmenazas()
         {
             Pos posicion;

@@ -15,6 +15,8 @@ namespace TP_LP2
         {
             vaciarTablero();
         }
+
+        //devuelve true si se pudo agregar, false si no
         public bool agregarCaracter(char simbolo, Pos posicion)
         {
             /* Si puede colocar el símbolo (no hay otra pieza) al tablero en la posición, 
@@ -70,6 +72,8 @@ namespace TP_LP2
             }
             return true;
         }
+
+        //si el tablero ya se encuentra en la lista de tableros solución, devuelve true
         public bool yaSeEncuentraEnLista()
         {
             bool igual = true;
@@ -94,7 +98,7 @@ namespace TP_LP2
             return false;
 
         }
-        //imprime tableroPiezas
+
         public void imprimirTablero()
         {
             Console.WriteLine("\n----------\n");
@@ -106,6 +110,7 @@ namespace TP_LP2
             }
             Console.WriteLine("\n----------\n");
         }
+
         //Devuelve una lista de las posiciones vacías ("0")
         public Pos[] getPosVacias()
         {
@@ -123,6 +128,8 @@ namespace TP_LP2
                     }
             return posVacias;
         }
+
+        //Devuelve la cantidad de posiciones vacías
         public int getCantPosVacias()
         {
             int contPosVacias = 0;
@@ -132,7 +139,7 @@ namespace TP_LP2
             return contPosVacias;
         }
 
-        //Si no recibe ninguna letra, vacía el tablero, sino elimina esa letra en la pos en el tablero
+        //Elimina esa letra en la pos en el tablero
         public void limpiarTablero(Pos pos, char letra = ' ')
         {
             for (int i = 0; i < 8; i++)
@@ -144,6 +151,8 @@ namespace TP_LP2
                 }
             }
         }
+
+        //Vacía el tablero
         public void vaciarTablero()
         {
             for (int i = 0; i < 8; i++)

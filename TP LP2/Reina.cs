@@ -9,6 +9,8 @@ namespace TP_LP2
     class Reina : Pieza
     {
         public Reina(Color color_) : base('R', color_){ }
+
+        //recorre el ataque de la Reina si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
@@ -19,8 +21,8 @@ namespace TP_LP2
                 do
                 {
                     posAux.y--;
-                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                        seguirFatal = false;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0') //si en el camino nos encontramos con una pieza
+                        seguirFatal = false; //todos los ataques restantes serán leves
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
@@ -165,6 +167,8 @@ namespace TP_LP2
                 } while (posAux.y > 0 && posAux.x > 0);
             }
         }
+
+        //contador de cuántas piezas amenazarían (que no estén ya amenazadas) si se colocara una Reina en esa posición
         public override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0;
@@ -212,13 +216,19 @@ namespace TP_LP2
             }
             return contAmenazas - 2; //porque al verificar fila y columna se cuenta posicion
         }
+
+        //coloca la Reina y llama a la siguiente en ListaPiezas
         public override void colocarPieza()
         {
+            //nuestras mejores posiciones para la Reina: el centro (si queremos aumentar el número de tableros, esto se podría cambiar)
+
             Pos[] mejoresPos = new Pos[4];
             mejoresPos[0].x = 3; mejoresPos[0].y = 3;
             mejoresPos[1].x = 3; mejoresPos[1].y = 4;
             mejoresPos[2].x = 4; mejoresPos[2].y = 3;
             mejoresPos[3].x = 4; mejoresPos[3].y = 4;
+
+            //ordenamos estas posiciones según cuántos casilleros amenazaría la Reina si se colocara en cada una (de mayor -más conveniente- a menor)
 
             int contCambios;
             for (int i = 0; i < 4; i++)
@@ -238,15 +248,17 @@ namespace TP_LP2
                     break;
             }
 
+            //para cada una de las mejores posiciones (ya ordenadas):
+
             for (int i = 0; i < 4; i++)
             {
-                if (Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]))
+                if (Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]))//agregamos la pieza
                 {
-                    actualizarAmenazas();
+                    actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
-                    Global.tableroAmenazas.esSolucion();
+                    Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución
 
-                    if (Global.piezasAgregadas < 8)
+                    if (Global.piezasAgregadas < 8)//si todavía no se colocaron todas las piezas, se coloca la siguiente
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }

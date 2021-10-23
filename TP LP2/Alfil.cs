@@ -9,6 +9,8 @@ namespace TP_LP2
     class Alfil : Pieza
     {
         public Alfil(Color color_) : base('A', color_) { }
+
+        //recorre el ataque del Alfil si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
@@ -20,8 +22,8 @@ namespace TP_LP2
                 do
                 {
                     posAux.y++; posAux.x++;
-                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
-                        seguirFatal = false;
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0') //si en el camino nos encontramos con una pieza
+                        seguirFatal = false; //todos los ataques restantes serán leves
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
@@ -88,6 +90,8 @@ namespace TP_LP2
                 } while (posAux.y > 0 && posAux.x > 0);
             }
         }
+
+        //contador de cuántas piezas amenazarían (que no estén ya amenazadas) si se colocara un Alfil en esa posición
         public override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0; Pos posAux = posicion;
@@ -130,8 +134,12 @@ namespace TP_LP2
             }
             return contAmenazas;
         }
+
+        //coloca el Alfil y llama a la siguiente en ListaPiezas
         public override void colocarPieza()
         {
+            //nuestras mejores posiciones para el Alfil: el centro (si queremos aumentar el número de tableros, esto se podría cambiar)
+
             Pos[] mejoresPos = new Pos[2];
             if (this.color == Color.NEGRO)
             {
@@ -144,6 +152,8 @@ namespace TP_LP2
                 mejoresPos[1].x = 4; mejoresPos[1].y = 3;
             }
 
+            //ordenamos estas posiciones según cuántos casilleros amenazaría el alfil si se colocara en cada una (de mayor -más conveniente- a menor)
+
             if (cuantasAmenaza(mejoresPos[0]) < cuantasAmenaza(mejoresPos[1]))
             {
                 Pos aux = mejoresPos[0];
@@ -151,15 +161,17 @@ namespace TP_LP2
                 mejoresPos[1] = aux;
             }
 
+            //para cada una de las mejores posiciones (ya ordenadas):
+
             for (int i = 0; i < 2; i++)
             {
-                if (Global.tableroPiezas.agregarCaracter('A', mejoresPos[i]))
+                if (Global.tableroPiezas.agregarCaracter('A', mejoresPos[i])) //agregamos la pieza
                 {
-                    actualizarAmenazas();
+                    actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
-                    Global.tableroAmenazas.esSolucion();
+                    Global.tableroAmenazas.esSolucion(); //si es solución se agrega el tablero a la lista de tableros solución
 
-                    if (Global.piezasAgregadas < 8)
+                    if (Global.piezasAgregadas < 8) //si todavía no se colocaron todas las piezas, se coloca la siguiente
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }

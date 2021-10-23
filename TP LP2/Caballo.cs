@@ -9,6 +9,8 @@ namespace TP_LP2
     class Caballo : Pieza
     {
         public Caballo(Color color_) : base('C', color_) { }
+
+        //recorre el ataque del Caballo si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
         {
             Pos posAux = posicion;
@@ -237,6 +239,8 @@ namespace TP_LP2
                 }
             }
         }
+
+        //contador de cuántas piezas amenazarían (que no estén ya amenazadas) si se colocara un Caballo en esa posición
         public override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0; Pos posAux = posicion;
@@ -305,18 +309,25 @@ namespace TP_LP2
             }
             return contAmenazas;
         }
+
+        //coloca el Caballo y llama a la siguiente en ListaPiezas
         public override void colocarPieza()
         {
+            //nos fijamos qué posiciones nos falta atacar:
+
             Pos[] atacarPos = Global.tableroAmenazas.getPosVacias();
 
             Pos[] mejoresPos = new Pos[] { }; 
-            Pos[] auxiliar;
+
+            //por lo que nuestras mejores posiciones serán las que puedan atacar esos lugares vacíos:
+
             for (int i = 0; i < Global.tableroAmenazas.getCantPosVacias(); i++)
             {
-                auxiliar = dondeColocarParaAtacar(atacarPos[i]);
-                mejoresPos = mejoresPos.Concat(auxiliar).ToArray();
+                mejoresPos = mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
             }
             Global.sacarPosRepetidas(mejoresPos);
+
+            //siempre ordenadas según cuántos casilleros amenaza cada una
 
             int contCambios;
             for (int i = 0; i < mejoresPos.Length; i++)
@@ -336,15 +347,17 @@ namespace TP_LP2
                     break;
             }
 
+            //para cada una de las mejores posiciones (ya ordenadas):
+
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]))
+                if (Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]))//agregamos la pieza
                 {
-                    actualizarAmenazas();
+                    actualizarAmenazas();//actualizamos las amenazas de esta y todas las otras piezas
 
-                    Global.tableroAmenazas.esSolucion();
+                    Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución
 
-                    if (Global.piezasAgregadas < 8)
+                    if (Global.piezasAgregadas < 8)//si todavía no se colocaron todas las piezas, se coloca la siguiente
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }
@@ -353,6 +366,8 @@ namespace TP_LP2
             }
             Global.piezasAgregadas--;
         }
+
+        //devuelve las posiciones en las que se debería colocar un Caballo para atacar las posiciones pasadas por parámetro
         private Pos[] dondeColocarParaAtacar(Pos posAtacar)
         {
             Pos[] dondeColocar = new Pos[8];
