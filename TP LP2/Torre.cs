@@ -119,10 +119,10 @@ namespace TP_LP2
 
             //ordenamos estas posiciones según cuántos casilleros amenazaría la torre si se colocara en cada una (de mayor -más conveniente- a menor)
             int contCambios;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < mejoresPos.Length; i++)
             {
                 contCambios = 0;
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < mejoresPos.Length - 1; j++)
                 {
                     if (cuantasAmenaza(mejoresPos[j]) < cuantasAmenaza(mejoresPos[j + 1]))
                     {
@@ -137,11 +137,14 @@ namespace TP_LP2
             }
 
             //para cada una de las 4 mejores posiciones (ya ordenadas):
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < mejoresPos.Length; i++)
             {
                 
                 if (Global.tableroPiezas.agregarCaracter('T', mejoresPos[i])) //agregamos la pieza
                 {
+                    Console.WriteLine("Torre");
+                    Console.ReadKey();
+
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
                     Global.tableroAmenazas.esSolucion(); //si es solución se agrega el tablero a la lista de tableros solución

@@ -140,33 +140,59 @@ namespace TP_LP2
         {
             //nuestras mejores posiciones para el Alfil: el centro (si queremos aumentar el número de tableros, esto se podría cambiar)
 
-            Pos[] mejoresPos = new Pos[2];
+            Pos[] mejoresPos = new Pos[8];
             if (this.color == Color.NEGRO)
             {
                 mejoresPos[0].x = 3; mejoresPos[0].y = 3;
                 mejoresPos[1].x = 4; mejoresPos[1].y = 4;
+                mejoresPos[2].x = 2; mejoresPos[0].y = 2;
+                mejoresPos[3].x = 5; mejoresPos[3].y = 5;
+                mejoresPos[4].x = 2; mejoresPos[4].y = 4;
+                mejoresPos[5].x = 4; mejoresPos[5].y = 2;
+                mejoresPos[6].x = 5; mejoresPos[6].y = 3;
+                mejoresPos[7].x = 3; mejoresPos[7].y = 5;
             }
             else if (this.color == Color.BLANCO)
             {
                 mejoresPos[0].x = 3; mejoresPos[0].y = 4;
                 mejoresPos[1].x = 4; mejoresPos[1].y = 3;
+                mejoresPos[2].x = 2; mejoresPos[0].y = 5;
+                mejoresPos[3].x = 2; mejoresPos[3].y = 3;
+                mejoresPos[4].x = 3; mejoresPos[4].y = 2;
+                mejoresPos[5].x = 5; mejoresPos[5].y = 2;
+                mejoresPos[6].x = 5; mejoresPos[6].y = 4;
+                mejoresPos[7].x = 4; mejoresPos[7].y = 5;
             }
 
             //ordenamos estas posiciones según cuántos casilleros amenazaría el alfil si se colocara en cada una (de mayor -más conveniente- a menor)
 
-            if (cuantasAmenaza(mejoresPos[0]) < cuantasAmenaza(mejoresPos[1]))
+            int contCambios;
+            for (int i = 0; i < mejoresPos.Length; i++)
             {
-                Pos aux = mejoresPos[0];
-                mejoresPos[0] = mejoresPos[1];
-                mejoresPos[1] = aux;
+                contCambios = 0;
+                for (int j = 0; j < mejoresPos.Length - 1; j++)
+                {
+                    if (cuantasAmenaza(mejoresPos[j]) < cuantasAmenaza(mejoresPos[j + 1]))
+                    {
+                        Pos aux = mejoresPos[j];
+                        mejoresPos[j] = mejoresPos[j + 1];
+                        mejoresPos[j + 1] = aux;
+                        contCambios++;
+                    }
+                }
+                if (contCambios == 0)
+                    break;
             }
 
             //para cada una de las mejores posiciones (ya ordenadas):
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < mejoresPos.Length; i++)
             {
                 if (Global.tableroPiezas.agregarCaracter('A', mejoresPos[i])) //agregamos la pieza
                 {
+                    Console.WriteLine("Alfil");
+                    Console.ReadKey();
+
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
                     Global.tableroAmenazas.esSolucion(); //si es solución se agrega el tablero a la lista de tableros solución

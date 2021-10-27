@@ -20,6 +20,10 @@ namespace TP_LP2
             //TODO: descomentar
             
             Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
+            //TODO: que se pueda elegir la cantidad de tableros en el forms (botones 1 5 10 ...)
+            //TODO: que no falte NADA del enunciado
+            //hasta 1 min 30 para las 10 soluciones (rotar, espejar, etc)
+            //que los alfiles no puedan ir en las diagonales de la reina
         }
     }
     public class Global
@@ -38,9 +42,10 @@ namespace TP_LP2
         public static Tablero tableroAmenazas = new Tablero();
         public static Tablero tableroPiezas = new Tablero();
         public const int TABLEROSMAX = 10;
-        public static void sacarPosRepetidas(Pos[] arrayPos)
+        public static Pos[] sacarPosRepetidas(Pos[] arrayPos)
         {
             arrayPos = arrayPos.Distinct().ToArray();
+            return arrayPos;
         }
 
     }

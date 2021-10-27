@@ -325,7 +325,7 @@ namespace TP_LP2
             {
                 mejoresPos = mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
             }
-            Global.sacarPosRepetidas(mejoresPos);
+            mejoresPos = Global.sacarPosRepetidas(mejoresPos);
 
             //siempre ordenadas según cuántos casilleros amenaza cada una
 
@@ -353,6 +353,9 @@ namespace TP_LP2
             {
                 if (Global.tableroPiezas.agregarCaracter('C', mejoresPos[i]))//agregamos la pieza
                 {
+                    Console.WriteLine("Caballo");
+                    Console.ReadKey();
+
                     actualizarAmenazas();//actualizamos las amenazas de esta y todas las otras piezas
 
                     Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución

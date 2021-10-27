@@ -176,24 +176,24 @@ namespace TP_LP2
             for (int i = 0; i < 8; i++)
             {
                 posAux.y = i; posAux.x = posicion.x;
-                if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                if (Global.tableroAmenazas.getCaracter(posAux) == '0' && !Array.Equals(posAux, posicion))
                     contAmenazas++;
                 posAux.x = i; posAux.y = posicion.y;
-                if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                if (Global.tableroAmenazas.getCaracter(posAux) == '0' && !Array.Equals(posAux, posicion))
                     contAmenazas++;
                 if (posicion.x + i <= 7)
                 {
                     if (posicion.y + i <= 7) //derecha arriba
                     {
                         posAux.x = posicion.x + i; posAux.y = posicion.y + i;
-                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0' && !Array.Equals(posAux, posicion))
                             contAmenazas++;
 
                     }
                     if (posicion.y - i >= 0) //derecha abajo
                     {
                         posAux.x = posicion.x + i; posAux.y = posicion.y - i;
-                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0' && !Array.Equals(posAux, posicion))
                             contAmenazas++;
                     }
                 }
@@ -202,14 +202,14 @@ namespace TP_LP2
                     if (posicion.y + i <= 7) //izquierda arriba
                     {
                         posAux.x = posicion.x - i; posAux.y = posicion.y + i;
-                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0' && !Array.Equals(posAux, posicion))
                             contAmenazas++;
 
                     }
                     if (posicion.y - i >= 0) //izquierda abajo
                     {
                         posAux.x = posicion.x - i; posAux.y = posicion.y - i;
-                        if (Global.tableroAmenazas.getCaracter(posAux) == '0')
+                        if (Global.tableroAmenazas.getCaracter(posAux) == '0' && !Array.Equals(posAux, posicion))
                             contAmenazas++;
                     }
                 }
@@ -231,10 +231,10 @@ namespace TP_LP2
             //ordenamos estas posiciones según cuántos casilleros amenazaría la Reina si se colocara en cada una (de mayor -más conveniente- a menor)
 
             int contCambios;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < mejoresPos.Length; i++)
             {
                 contCambios = 0;
-                for (int j = 0; j < 3; j++)
+                for (int j = 0; j < mejoresPos.Length - 1; j++)
                 {
                     if (cuantasAmenaza(mejoresPos[j]) < cuantasAmenaza(mejoresPos[j + 1]))
                     {
@@ -250,10 +250,13 @@ namespace TP_LP2
 
             //para cada una de las mejores posiciones (ya ordenadas):
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < mejoresPos.Length; i++)
             {
                 if (Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]))//agregamos la pieza
                 {
+                    Console.WriteLine("Reina");
+                    Console.
+
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
                     Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución
