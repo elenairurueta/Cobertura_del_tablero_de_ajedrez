@@ -8,7 +8,7 @@ namespace TP_LP2
 {
     class Reina : Pieza
     {
-        public Reina(Color color_) : base('R', color_){ }
+        public Reina(ColorPieza color_) : base('R', color_){ }
 
         //recorre el ataque de la Reina si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
@@ -252,10 +252,9 @@ namespace TP_LP2
 
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (Global.tableroPiezas.agregarCaracter('Q', mejoresPos[i]))//agregamos la pieza
+                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i]))//agregamos la pieza
                 {
                     Console.WriteLine("Reina");
-                    Console.
 
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
@@ -265,7 +264,7 @@ namespace TP_LP2
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], 'Q');
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
                 }
             }
             Global.piezasAgregadas--;

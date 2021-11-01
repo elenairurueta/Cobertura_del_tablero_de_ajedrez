@@ -8,7 +8,7 @@ namespace TP_LP2
 {
     class Alfil : Pieza
     {
-        public Alfil(Color color_) : base('A', color_) { }
+        public Alfil(ColorPieza color_) : base('A', color_) { }
 
         //recorre el ataque del Alfil si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
@@ -141,7 +141,7 @@ namespace TP_LP2
             //nuestras mejores posiciones para el Alfil: el centro (si queremos aumentar el número de tableros, esto se podría cambiar)
 
             Pos[] mejoresPos = new Pos[8];
-            if (this.color == Color.NEGRO)
+            if (this.color == ColorPieza.Black)
             {
                 mejoresPos[0].x = 3; mejoresPos[0].y = 3;
                 mejoresPos[1].x = 4; mejoresPos[1].y = 4;
@@ -152,7 +152,7 @@ namespace TP_LP2
                 mejoresPos[6].x = 5; mejoresPos[6].y = 3;
                 mejoresPos[7].x = 3; mejoresPos[7].y = 5;
             }
-            else if (this.color == Color.BLANCO)
+            else if (this.color == ColorPieza.White)
             {
                 mejoresPos[0].x = 3; mejoresPos[0].y = 4;
                 mejoresPos[1].x = 4; mejoresPos[1].y = 3;
@@ -188,10 +188,9 @@ namespace TP_LP2
 
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (Global.tableroPiezas.agregarCaracter('A', mejoresPos[i])) //agregamos la pieza
+                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i])) //agregamos la pieza
                 {
                     Console.WriteLine("Alfil");
-                    Console.ReadKey();
 
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
@@ -201,7 +200,7 @@ namespace TP_LP2
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], 'A');
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
                 }
             }
             Global.piezasAgregadas--;

@@ -8,7 +8,7 @@ namespace TP_LP2
 {
     class Torre : Pieza
     {
-        public Torre(Color color_) : base('T', color_){ }
+        public Torre(ColorPieza color_) : base('T', color_){ }
 
         //recorre el ataque de la Torre si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
@@ -140,10 +140,9 @@ namespace TP_LP2
             for (int i = 0; i < mejoresPos.Length; i++)
             {
                 
-                if (Global.tableroPiezas.agregarCaracter('T', mejoresPos[i])) //agregamos la pieza
+                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i])) //agregamos la pieza
                 {
                     Console.WriteLine("Torre");
-                    Console.ReadKey();
 
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
@@ -153,7 +152,7 @@ namespace TP_LP2
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], 'T');
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
                 }
             }
             Global.piezasAgregadas--;

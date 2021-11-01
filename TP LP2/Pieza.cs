@@ -9,15 +9,15 @@ namespace TP_LP2
 
     public abstract class Pieza
     {
-        char simbolo;
-        protected Color color;
-        protected Pieza(char simbolo_, Color color_) {
+        protected char simbolo;
+        protected ColorPieza color;
+        protected Pieza(char simbolo_, ColorPieza color_) {
             this.simbolo = simbolo_;
             this.color = color_;
         }
 
         //analiza, de las mejores posiciones definidas para cada pieza, cuál es la mejor
-        public abstract void colocarPieza();
+        public abstract void colocarPieza(); //TODO: como el loop final es para todas igual, hacerlo acá y hacer una función abstract getMejoresPos()
 
         //hace un conteo de las posibles amenazas de la pieza en la posición
         public abstract int cuantasAmenaza(Pos posicion);

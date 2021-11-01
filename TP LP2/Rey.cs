@@ -8,7 +8,7 @@ namespace TP_LP2
 {
     class Rey : Pieza
     {
-        public Rey(Color color_) : base('K', color_){ }
+        public Rey(ColorPieza color_) : base('K', color_){ }
 
         //recorre el ataque del Rey si se colocara en esa posición y marca en el tableroAmenazas sus ataques leves y fatales
         public static void colorearAtaque(Pos posicion)
@@ -181,15 +181,15 @@ namespace TP_LP2
                 if (contCambios == 0)
                     break;
             }
+            mejoresPos = Global.sacarNultimasPos(Global.PODAREY, mejoresPos);
 
-            //para cada una de las mejores posiciones (ya ordenadas):
+            //para cada una de las mejores posiciones (ya ordenadas y podadas):
 
             for (int i = 0; i < mejoresPos.Length; i++)
             {
-                if (Global.tableroPiezas.agregarCaracter('K', mejoresPos[i]))//agregamos la pieza
+                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i]))//agregamos la pieza
                 {
                     Console.WriteLine("Rey");
-                    Console.ReadKey();
 
                     actualizarAmenazas();//actualizamos las amenazas de esta y todas las otras piezas
 
@@ -199,7 +199,7 @@ namespace TP_LP2
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                     }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], 'K');
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
                 }
             }
             Global.piezasAgregadas--;

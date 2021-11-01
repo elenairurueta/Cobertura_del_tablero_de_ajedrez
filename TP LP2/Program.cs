@@ -42,17 +42,23 @@ namespace TP_LP2
         public static Tablero tableroAmenazas = new Tablero();
         public static Tablero tableroPiezas = new Tablero();
         public const int TABLEROSMAX = 10;
+        public const int PODAREY = 5;
+        public const int PODACABALLO = 5;
+
+
         public static Pos[] sacarPosRepetidas(Pos[] arrayPos)
         {
-            arrayPos = arrayPos.Distinct().ToArray();
-            return arrayPos;
+            return arrayPos.Distinct().ToArray();
         }
-
+        public static Pos[] sacarNultimasPos(int N, Pos[] arrayPos)
+        {
+            return arrayPos.SkipLast(arrayPos.Length - N).ToArray();
+        }
     }
     public struct Pos
     {
         public int x;
         public int y;
     }
-    public enum Color { BLANCO, NEGRO };
+    public enum ColorPieza { White, Black };
 }
