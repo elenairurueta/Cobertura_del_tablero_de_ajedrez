@@ -25,13 +25,13 @@ namespace TP_LP2
                     {
                         posAux.x++;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                     if (posAux.x > 1)
                     {
                         posAux.x -= 2;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
 
                 }
@@ -44,13 +44,13 @@ namespace TP_LP2
                         {
                             posAux.x++;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                         if (posAux.x > 1)
                         {
                             posAux.x -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                     }
                     else
@@ -59,13 +59,13 @@ namespace TP_LP2
                         {
                             posAux.x++;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                         if (posAux.x > 1)
                         {
                             posAux.x -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                     }
                 }
@@ -82,13 +82,13 @@ namespace TP_LP2
                     {
                         posAux.x++;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                     if (posAux.x > 1)
                     {
                         posAux.x -= 2;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                 }
                 else
@@ -100,13 +100,13 @@ namespace TP_LP2
                         {
                             posAux.x++;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                         if (posAux.x > 1)
                         {
                             posAux.x -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                     }
                     else
@@ -115,13 +115,13 @@ namespace TP_LP2
                         {
                             posAux.x++;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                         if (posAux.x > 1)
                         {
                             posAux.x -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                     }
                 }
@@ -138,13 +138,13 @@ namespace TP_LP2
                     {
                         posAux.y++;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                     if (posAux.y > 1)
                     {
                         posAux.y -= 2;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                 }
                 else
@@ -156,13 +156,13 @@ namespace TP_LP2
                         {
                             posAux.y++;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                         if (posAux.y > 1)
                         {
                             posAux.y -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                     }
                     else
@@ -171,13 +171,13 @@ namespace TP_LP2
                         {
                             posAux.y++;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                         if (posAux.y > 1)
                         {
                             posAux.y -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                     }
                 }
@@ -194,13 +194,13 @@ namespace TP_LP2
                     {
                         posAux.y++;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                     if (posAux.y > 1)
                     {
                         posAux.y -= 2;
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
                 }
                 else
@@ -212,13 +212,13 @@ namespace TP_LP2
                         {
                             posAux.y++;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                         if (posAux.y > 1)
                         {
                             posAux.y -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                                Global.tableroAmenazas.agregarCaracter('L', posAux);
+                                Global.tableroAmenazas.setCaracter('L', posAux);
                         }
                     }
                     else
@@ -227,13 +227,13 @@ namespace TP_LP2
                         {
                             posAux.y++;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                         if (posAux.y > 1)
                         {
                             posAux.y -= 2;
                             if (Global.tableroPiezas.getCaracter(posAux) == '0')
-                                Global.tableroAmenazas.agregarCaracter('F', posAux);
+                                Global.tableroAmenazas.setCaracter('F', posAux);
                         }
                     }
                 }
@@ -241,7 +241,7 @@ namespace TP_LP2
         }
 
         //contador de cuántas piezas amenazarían (que no estén ya amenazadas) si se colocara un Caballo en esa posición
-        public override int cuantasAmenaza(Pos posicion)
+        protected override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0; Pos posAux = posicion;
             for (int i = 0; i < 8; i++)
@@ -310,8 +310,8 @@ namespace TP_LP2
             return contAmenazas;
         }
 
-        //coloca el Caballo y llama a la siguiente en ListaPiezas
-        public override void colocarPieza()
+        //devuelve las mejores posiciones donde colocar la pieza ordenadas según cuantos casilleros amenazaría si se colocara
+        public override Pos[] getMejoresPos()
         {
             //nos fijamos qué posiciones nos falta atacar:
 
@@ -321,53 +321,14 @@ namespace TP_LP2
 
             //por lo que nuestras mejores posiciones serán las que puedan atacar esos lugares vacíos:
 
-            for (int i = 0; i < Global.tableroAmenazas.getCantPosVacias(); i++)
+            for (int i = 0; i < atacarPos.Length; i++)
             {
                 mejoresPos = mejoresPos.Concat(dondeColocarParaAtacar(atacarPos[i])).ToArray();
             }
             mejoresPos = Global.sacarPosRepetidas(mejoresPos);
+            mejoresPos = ordenarPosSegunCuantasAmenazan(mejoresPos);
+            return Global.devolverNprimerasPos(Global.PODACABALLO, mejoresPos);
 
-            //siempre ordenadas según cuántos casilleros amenaza cada una
-
-            int contCambios;
-            for (int i = 0; i < mejoresPos.Length; i++)
-            {
-                contCambios = 0;
-                for (int j = 0; j < mejoresPos.Length - 1; j++)
-                {
-                    if (cuantasAmenaza(mejoresPos[j]) < cuantasAmenaza(mejoresPos[j + 1]))
-                    {
-                        Pos aux = mejoresPos[j];
-                        mejoresPos[j] = mejoresPos[j + 1];
-                        mejoresPos[j + 1] = aux;
-                        contCambios++;
-                    }
-                }
-                if (contCambios == 0)
-                    break;
-            }
-            mejoresPos = Global.sacarNultimasPos(Global.PODACABALLO, mejoresPos);
-
-            //para cada una de las mejores posiciones (ya ordenadas y podadas):
-
-            for (int i = 0; i < mejoresPos.Length; i++)
-            {
-                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i]))//agregamos la pieza
-                {
-                    Console.WriteLine("Caballo");
-
-                    actualizarAmenazas();//actualizamos las amenazas de esta y todas las otras piezas
-
-                    Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución
-
-                    if (Global.piezasAgregadas < 8)//si todavía no se colocaron todas las piezas, se coloca la siguiente
-                    {
-                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
-                    }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
-                }
-            }
-            Global.piezasAgregadas--;
         }
 
         //devuelve las posiciones en las que se debería colocar un Caballo para atacar las posiciones pasadas por parámetro

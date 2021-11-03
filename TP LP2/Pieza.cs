@@ -16,11 +16,38 @@ namespace TP_LP2
             this.color = color_;
         }
 
-        //analiza, de las mejores posiciones definidas para cada pieza, cuál es la mejor
-        public abstract void colocarPieza(); //TODO: como el loop final es para todas igual, hacerlo acá y hacer una función abstract getMejoresPos()
+        //devuelve las mejores posiciones para colocar una pieza ordenada según cuántos casilleros (nuevos) amenaza en esa posición
+        public abstract Pos[] getMejoresPos();
 
-        //hace un conteo de las posibles amenazas de la pieza en la posición
-        public abstract int cuantasAmenaza(Pos posicion);
+        //hace un conteo de las posibles amenazas (nuevas) de la pieza en la posición
+        protected abstract int cuantasAmenaza(Pos posicion);
+
+        //coloca una pieza en las mejores posiciones y llama a que se coloquen las posteriores de listaPiezas
+        public void colocarPieza()
+        {
+            Pos[] mejoresPos = getMejoresPos();
+
+            //para cada una de las mejores posiciones (ya ordenadas):
+
+            for (int i = 0; i < mejoresPos.Length; i++)
+            {
+                if (Global.tableroPiezas.setCaracter(simbolo, mejoresPos[i]))//agregamos la pieza
+                {
+                    Console.WriteLine(simbolo.ToString());
+
+                    actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
+
+                    Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución
+                    
+                    if (Global.piezasAgregadas < Global.listaPiezas.Length)//si todavía no se colocaron todas las piezas, se coloca la siguiente
+                    {
+                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
+                    }
+                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
+                }
+            }
+            Global.piezasAgregadas--;
+        }
 
         //vacía el tablero y llama a colorearAtaque() de todas las piezas ya colocadas
         protected void actualizarAmenazas()
@@ -61,6 +88,29 @@ namespace TP_LP2
                     }
                 }
             }
+        }
+
+        //ordena el array de posiciones pasado por parámetro según cuántos casilleros (no amenazados) amenazaría en esa posición (en orden descendiente)
+        protected Pos[] ordenarPosSegunCuantasAmenazan(Pos[] listaPos)
+        {
+            int contCambios;
+            for (int i = 0; i < listaPos.Length; i++)
+            {
+                contCambios = 0;
+                for (int j = 0; j < listaPos.Length - 1; j++)
+                {
+                    if (cuantasAmenaza(listaPos[j]) < cuantasAmenaza(listaPos[j + 1]))
+                    {
+                        Pos aux = listaPos[j];
+                        listaPos[j] = listaPos[j + 1];
+                        listaPos[j + 1] = aux;
+                        contCambios++;
+                    }
+                }
+                if (contCambios == 0)
+                    break;
+            }
+            return listaPos;
         }
     }
 }

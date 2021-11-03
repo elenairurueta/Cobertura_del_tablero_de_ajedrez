@@ -27,9 +27,9 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x < 7);
             }
 
@@ -46,9 +46,9 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x < 7);
             }
 
@@ -65,9 +65,9 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x > 0);
             }
 
@@ -84,15 +84,15 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x > 0);
             }
         }
 
         //contador de cuántas piezas amenazarían (que no estén ya amenazadas) si se colocara un Alfil en esa posición
-        public override int cuantasAmenaza(Pos posicion)
+        protected override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0; Pos posAux = posicion;
             for (int i = 0; i < 8; i++)
@@ -135,13 +135,13 @@ namespace TP_LP2
             return contAmenazas;
         }
 
-        //coloca el Alfil y llama a la siguiente en ListaPiezas
-        public override void colocarPieza()
+        //devuelve las mejores posiciones donde colocar la pieza ordenadas según cuantos casilleros amenazaría si se colocara
+        public override Pos[] getMejoresPos()
         {
             //nuestras mejores posiciones para el Alfil: el centro (si queremos aumentar el número de tableros, esto se podría cambiar)
 
             Pos[] mejoresPos = new Pos[8];
-            if (this.color == ColorPieza.Black)
+            if (this.color == ColorPieza.NEGRO)
             {
                 mejoresPos[0].x = 3; mejoresPos[0].y = 3;
                 mejoresPos[1].x = 4; mejoresPos[1].y = 4;
@@ -152,7 +152,7 @@ namespace TP_LP2
                 mejoresPos[6].x = 5; mejoresPos[6].y = 3;
                 mejoresPos[7].x = 3; mejoresPos[7].y = 5;
             }
-            else if (this.color == ColorPieza.White)
+            else if (this.color == ColorPieza.BLANCO)
             {
                 mejoresPos[0].x = 3; mejoresPos[0].y = 4;
                 mejoresPos[1].x = 4; mejoresPos[1].y = 3;
@@ -166,44 +166,8 @@ namespace TP_LP2
 
             //ordenamos estas posiciones según cuántos casilleros amenazaría el alfil si se colocara en cada una (de mayor -más conveniente- a menor)
 
-            int contCambios;
-            for (int i = 0; i < mejoresPos.Length; i++)
-            {
-                contCambios = 0;
-                for (int j = 0; j < mejoresPos.Length - 1; j++)
-                {
-                    if (cuantasAmenaza(mejoresPos[j]) < cuantasAmenaza(mejoresPos[j + 1]))
-                    {
-                        Pos aux = mejoresPos[j];
-                        mejoresPos[j] = mejoresPos[j + 1];
-                        mejoresPos[j + 1] = aux;
-                        contCambios++;
-                    }
-                }
-                if (contCambios == 0)
-                    break;
-            }
-
-            //para cada una de las mejores posiciones (ya ordenadas):
-
-            for (int i = 0; i < mejoresPos.Length; i++)
-            {
-                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i])) //agregamos la pieza
-                {
-                    Console.WriteLine("Alfil");
-
-                    actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
-
-                    Global.tableroAmenazas.esSolucion(); //si es solución se agrega el tablero a la lista de tableros solución
-
-                    if (Global.piezasAgregadas < 8) //si todavía no se colocaron todas las piezas, se coloca la siguiente
-                    {
-                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
-                    }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
-                }
-            }
-            Global.piezasAgregadas--;
+            mejoresPos = ordenarPosSegunCuantasAmenazan(mejoresPos);
+            return Global.devolverNprimerasPos(Global.PODAALFIL, mejoresPos);
         }
     }
 }

@@ -27,9 +27,9 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F') //pero si ya está siendo atacada de forma fatal, le gana al leve
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux); //sino, ataque fatal
+                    else Global.tableroAmenazas.setCaracter('F', posAux); //sino, ataque fatal
                 } while (posAux.y > 0); //mientras que no nos pasemos del tablero
             }
 
@@ -46,9 +46,9 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y < 7);
             }
 
@@ -65,9 +65,9 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.x < 7);
             }
 
@@ -84,15 +84,15 @@ namespace TP_LP2
                     if (seguirFatal == false)
                     {
                         if (Global.tableroPiezas.getCaracter(posAux) != 'F')
-                            Global.tableroAmenazas.agregarCaracter('L', posAux);
+                            Global.tableroAmenazas.setCaracter('L', posAux);
                     }
-                    else Global.tableroAmenazas.agregarCaracter('F', posAux);
+                    else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.x > 0);
             }
         }
 
         //contador de cuántas piezas amenazarían (que no estén ya amenazadas) si se colocara una Torre en esa posición
-        public override int cuantasAmenaza(Pos posicion)
+        protected override int cuantasAmenaza(Pos posicion)
         {
             int contAmenazas = 0; Pos posAux = posicion;
             for (int i = 0; i < 8; i++)
@@ -107,8 +107,8 @@ namespace TP_LP2
             return contAmenazas - 2; //porque al recorrer la fila y columna se cuenta (x,y)
         }
 
-        //coloca la Torre y llama a la siguiente en ListaPiezas
-        public override void colocarPieza()
+        //devuelve las mejores posiciones donde colocar la pieza ordenadas según cuantos casilleros amenazaría si se colocara
+        public override Pos[] getMejoresPos()
         {
             //nuestras mejores posiciones para la torre: las esquinas (si queremos aumentar el número de tableros, esto se podría cambiar)
             Pos[] mejoresPos = new Pos[4];
@@ -118,44 +118,7 @@ namespace TP_LP2
             mejoresPos[3].x = 7; mejoresPos[3].y = 7;
 
             //ordenamos estas posiciones según cuántos casilleros amenazaría la torre si se colocara en cada una (de mayor -más conveniente- a menor)
-            int contCambios;
-            for (int i = 0; i < mejoresPos.Length; i++)
-            {
-                contCambios = 0;
-                for (int j = 0; j < mejoresPos.Length - 1; j++)
-                {
-                    if (cuantasAmenaza(mejoresPos[j]) < cuantasAmenaza(mejoresPos[j + 1]))
-                    {
-                        Pos aux = mejoresPos[j];
-                        mejoresPos[j] = mejoresPos[j + 1];
-                        mejoresPos[j + 1] = aux;
-                        contCambios++;
-                    }
-                }
-                if (contCambios == 0)
-                    break;
-            }
-
-            //para cada una de las 4 mejores posiciones (ya ordenadas):
-            for (int i = 0; i < mejoresPos.Length; i++)
-            {
-                
-                if (Global.tableroPiezas.agregarCaracter(simbolo, mejoresPos[i])) //agregamos la pieza
-                {
-                    Console.WriteLine("Torre");
-
-                    actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
-
-                    Global.tableroAmenazas.esSolucion(); //si es solución se agrega el tablero a la lista de tableros solución
-                    
-                    if (Global.piezasAgregadas < 8) //si todavía no se colocaron todas las piezas, se coloca la siguiente
-                    {
-                        Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
-                    }
-                    Global.tableroPiezas.limpiarTablero(mejoresPos[i], simbolo);
-                }
-            }
-            Global.piezasAgregadas--;
+            return ordenarPosSegunCuantasAmenazan(mejoresPos);
         }
     }
 }

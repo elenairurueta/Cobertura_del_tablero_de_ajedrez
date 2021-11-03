@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace TP_LP2
 {
     public class Tablero
     {
+        #region ATRIBUTOS
         private char[,] tablero = new char[8, 8];
         private static Tablero[] listaTablerosSolucion = new Tablero[] { };
         public static int tablerosSolucion = 0;
+        #endregion
+
+        #region CONSTRUCTOR
         public Tablero()
         {
             vaciarTablero();
         }
+        #endregion
 
-        //devuelve true si se pudo agregar, false si no
-        public bool agregarCaracter(char simbolo, Pos posicion)
+        #region GETTERS_SETTERS
+        public bool setCaracter(char simbolo, Pos posicion)
         {
             /* Si puede colocar el símbolo (no hay otra pieza) al tablero en la posición, 
 			devuelve true. En el caso en que en esa posición hubiere una Torre ("T") y se
@@ -49,6 +56,22 @@ namespace TP_LP2
             return tablero[posicion.x, posicion.y];
         }
 
+        #endregion
+
+        public static void agregarSolucion(Tablero tableroPiezas, Tablero tableroAmenazas, bool rotarEspejar = true)
+        {
+            Tablero tableroAgregar = new Tablero(); tableroAgregar = tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
+
+            if (!tableroAgregar.yaSeEncuentraEnLista())
+            {
+                listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
+                tablerosSolucion++;
+                tableroPiezas.imprimirTablero();
+                tableroAmenazas.imprimirTablero();
+                if(rotarEspejar) tableroPiezas.rotarEspejarSolucion();
+            }
+        }
+
         //si todos los casilleros del tableroAmenazas tienen 1, devuelve true.
         public bool esSolucion()
         {
@@ -60,17 +83,69 @@ namespace TP_LP2
                         return false;
                 }
             }
-            Tablero tableroAgregar = new Tablero();
-            tableroAgregar = Global.tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
-
-            if (!tableroAgregar.yaSeEncuentraEnLista())
-            {
-                listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
-                tablerosSolucion++;
-                Global.tableroPiezas.imprimirTablero();
-                Global.tableroAmenazas.imprimirTablero();
-            }
+            agregarSolucion(Global.tableroPiezas, Global.tableroAmenazas);
             return true;
+        }
+
+        //rota y espeja el tablero solución generando la mayor cantidad de soluciones posibles a partir de esta
+        private void rotarEspejarSolucion()
+        {
+            Tablero nuevaSolucionPiezas; Tablero nuevaSolucionAmenazas;
+
+            #region ROTACIÓN_DERECHA
+
+            char[,] tableroAuxAmenazas = this.tablero;
+            char[,] tableroAuxPiezas = Global.tableroPiezas.tablero;
+
+            for (int i = 0; i < 3; i++)
+            {
+                nuevaSolucionPiezas = new Tablero();
+                nuevaSolucionAmenazas = new Tablero();
+
+                for (int x = 0; x < 8; x++)
+                {
+                    for (int y = 0; y < 8; y++)
+                    {
+                        nuevaSolucionPiezas.tablero[y, 8 - 1 - x] = tableroAuxPiezas[x, y];
+                        nuevaSolucionAmenazas.tablero[y, 8 - 1 - x] = tableroAuxAmenazas[x, y];
+                    }
+                }
+                agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+                tableroAuxAmenazas = nuevaSolucionAmenazas.tablero;
+                tableroAuxPiezas = nuevaSolucionPiezas.tablero;
+            }
+            #endregion
+
+            #region ESPEJADO_DIAGONAL_ArIzq_AbDer
+
+            nuevaSolucionPiezas = new Tablero();
+            nuevaSolucionAmenazas = new Tablero();
+
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    nuevaSolucionPiezas.tablero[x, y] = Global.tableroPiezas.tablero[y, x];
+                    nuevaSolucionAmenazas.tablero[x, y] = this.tablero[y, x];
+                }
+            }
+            agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+
+            #endregion
+
+            #region ESPEJADO_DIAGONAL_ArDer_AbIzq
+
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    nuevaSolucionPiezas.tablero[x, y] = Global.tableroPiezas.tablero[7 - y, 7 - x];
+                    nuevaSolucionAmenazas.tablero[x, y] = this.tablero[7 - y, 7 - x];
+                }
+            }
+            agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+
+            #endregion
         }
 
         //si el tablero ya se encuentra en la lista de tableros solución, devuelve true
@@ -104,11 +179,41 @@ namespace TP_LP2
             Console.WriteLine("\n----------\n");
             for (int j = 0; j < 8; j++)
             {
-                for (int i = 0; i < 8; i++)
-                    Console.Write(tablero[j, i] + " ");
+                for (int i = 0; i < 8; i++) 
+                    Console.Write(tablero[i, j] + " ");
                 Console.WriteLine("\n");
             }
             Console.WriteLine("\n----------\n");
+
+            string nombreImagen; Pos posicion;
+            for (int j = 0; j < 8; j++)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    posicion.x = i; posicion.y = j;
+                    switch(tablero[i, j])
+                    {
+                        case 'Q':
+                            nombreImagen = "Reina" + (Global.FormUnicaSolucion_.getColor(posicion) == Color.White?  "B":"N") + ".png";
+                            Global.FormUnicaSolucion_.setImagen();
+                            break;
+                        case 'T':
+                            break;
+                        case 'A':
+                            break;
+                        case 'C':
+                            break;
+                        case 'K':
+                            break;
+                        case 'L':
+                            break;
+                        case 'F':
+                            break;
+
+                    }
+                }
+            }
+
         }
 
         //Devuelve una lista de las posiciones vacías ("0")
@@ -116,15 +221,15 @@ namespace TP_LP2
         {
             if (esSolucion()) return null;
 
-            Pos[] posVacias = new Pos[getCantPosVacias()];
+            Pos[] posVacias = new Pos[] { };
 
-            int idx = 0; Pos posAux;
+            Pos posAux;
             for (int i = 0; i < 8; i++)
                 for (int j = 0; j < 8; j++)
-                    if (tablero[i, j] == '0') {
+                    if (tablero[i, j] == '0')
+                    {
                         posAux.x = i; posAux.y = j;
-                        posVacias[idx] = posAux;
-                        idx++;
+                        posVacias = posVacias.Append(posAux).ToArray();
                     }
             return posVacias;
         }
