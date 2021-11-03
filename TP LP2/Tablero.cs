@@ -66,9 +66,8 @@ namespace TP_LP2
             {
                 listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
                 tablerosSolucion++;
-                tableroPiezas.imprimirTablero();
-                tableroAmenazas.imprimirTablero();
-                if(rotarEspejar) tableroPiezas.rotarEspejarSolucion();
+                Tablero.imprimirTableros();
+                if (rotarEspejar) tableroPiezas.rotarEspejarSolucion();
             }
         }
 
@@ -152,7 +151,7 @@ namespace TP_LP2
         public bool yaSeEncuentraEnLista()
         {
             bool igual = true;
-            for (int i = 0; i < tablerosSolucion; i++)
+            for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
             {
                 for (int j = 0; j < 8; j++)
                 {
@@ -174,42 +173,52 @@ namespace TP_LP2
 
         }
 
-        public void imprimirTablero()
+        public static void imprimirTableros()
         {
-            Console.WriteLine("\n----------\n");
-            for (int j = 0; j < 8; j++)
-            {
-                for (int i = 0; i < 8; i++) 
-                    Console.Write(tablero[i, j] + " ");
-                Console.WriteLine("\n");
-            }
-            Console.WriteLine("\n----------\n");
 
             string nombreImagen; Pos posicion;
+            Global.FormUnicaSolucion_.vaciarTableros();
+
             for (int j = 0; j < 8; j++)
             {
                 for (int i = 0; i < 8; i++)
                 {
                     posicion.x = i; posicion.y = j;
-                    switch(tablero[i, j])
+                    switch (Global.tableroPiezas.tablero[i, j])
                     {
                         case 'Q':
-                            nombreImagen = "Reina" + (Global.FormUnicaSolucion_.getColor(posicion) == Color.White?  "B":"N") + ".png";
-                            Global.FormUnicaSolucion_.setImagen();
+                            nombreImagen = "Img\\Reina" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'T':
+                            nombreImagen = "Img\\Torre" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'A':
+                            nombreImagen = "Img\\Alfil" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'C':
+                            nombreImagen = "Img\\Caballo" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'K':
+                            nombreImagen = "Img\\Rey" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
+                        default:
+                            break;
+                    }
+                    switch (Global.tableroAmenazas.tablero[i, j])
+                    {
                         case 'L':
+                            Global.FormUnicaSolucion_.setBackgroundColor(Color.Yellow, posicion);
                             break;
                         case 'F':
+                            Global.FormUnicaSolucion_.setBackgroundColor(Color.Red, posicion);
                             break;
-
+                        default:
+                            break;
                     }
                 }
             }

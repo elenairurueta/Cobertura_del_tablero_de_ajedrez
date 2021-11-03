@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-namespace TP_LP2
-{
 
+namespace TP_LP2
+{ 
     public partial class MainForm : Form
     {
         public MainForm()
         {
             InitializeComponent();
-            
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -27,6 +26,7 @@ namespace TP_LP2
             Global.TABLEROSMAX = 1;
             Global.FormUnicaSolucion_.Show();
             this.Hide();
+
         }
 
         private void btn5_Click(object sender, EventArgs e)
@@ -34,6 +34,7 @@ namespace TP_LP2
             Global.TABLEROSMAX = 5;
             Global.FormUnicaSolucion_.Show();
             this.Hide();
+
         }
 
         private void btn10_Click(object sender, EventArgs e)
@@ -41,6 +42,7 @@ namespace TP_LP2
             Global.TABLEROSMAX = 10;
             Global.FormUnicaSolucion_.Show();
             this.Hide();
+
         }
     }
     

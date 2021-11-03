@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace TP_LP2
 {
-
     public abstract class Pieza
     {
+        #region ATRIBUTOS
         protected char simbolo;
         protected ColorPieza color;
+        #endregion
+
+        #region CONSTRUCTOR
         protected Pieza(char simbolo_, ColorPieza color_) {
             this.simbolo = simbolo_;
             this.color = color_;
         }
+        #endregion
 
         //devuelve las mejores posiciones para colocar una pieza ordenada según cuántos casilleros (nuevos) amenaza en esa posición
         public abstract Pos[] getMejoresPos();

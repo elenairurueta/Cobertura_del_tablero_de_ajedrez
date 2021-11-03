@@ -1,7 +1,7 @@
 ﻿
 namespace TP_LP2
 {
-    partial class FormUnicaSolucion
+    partial class FormSoluciones
     {
         /// <summary>
         /// Required designer variable.
@@ -29,34 +29,34 @@ namespace TP_LP2
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnVolverMain = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnSiguiente
+            // btnVolverMain
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(599, 414);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(137, 23);
-            this.btnSiguiente.TabIndex = 0;
-            this.btnSiguiente.Text = "Siguiente Solución";
-            this.btnSiguiente.UseVisualStyleBackColor = true;
-            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            this.btnVolverMain.Location = new System.Drawing.Point(629, 359);
+            this.btnVolverMain.Name = "btnVolverMain";
+            this.btnVolverMain.Size = new System.Drawing.Size(116, 23);
+            this.btnVolverMain.TabIndex = 0;
+            this.btnVolverMain.Text = "Menú Principal";
+            this.btnVolverMain.UseVisualStyleBackColor = true;
+            this.btnVolverMain.Click += new System.EventHandler(this.btnVolverMain_Click);
             // 
-            // FormUnicaSolucion
+            // FormSoluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1324, 608);
-            this.Controls.Add(this.btnSiguiente);
-            this.Name = "FormUnicaSolucion";
-            this.Text = "MainForm";
-            this.Load += new System.EventHandler(this.FormUnicaSolucion_Load);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnVolverMain);
+            this.Name = "FormSoluciones";
+            this.Text = "FormSoluciones";
+            this.Load += new System.EventHandler(this.FormSoluciones_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnVolverMain;
     }
 }

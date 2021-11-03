@@ -8,26 +8,43 @@ namespace TP_LP2
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1()); 
-            //TODO: descomentar
-            
-            //TODO: que se pueda elegir la cantidad de tableros en el forms (botones 1 5 10 ...)
-            //TODO: que no falte NADA del enunciado
-            //hasta 1 min 30 para las 10 soluciones (rotar, espejar, etc)
-            //que los alfiles no puedan ir en las diagonales de la reina?
+            Application.Run(new FormInicio());
         }
     }
-    public class Global
+
+    public static class Global
     {
-        public static Pieza[] listaPiezas = new Pieza[8]{
+        #region ATRIBUTOS
+
+        public static Pieza[] listaPiezas;
+        public static int piezasAgregadas;
+
+        public static Tablero tableroAmenazas;
+        public static Tablero tableroPiezas;
+
+        public static int TABLEROSMAX;
+
+        public static int PODAREY;
+        public static int PODACABALLO;
+        public static int PODAALFIL;
+
+        public static MainForm MainForm_;
+        public static FormUnicaSolucion FormUnicaSolucion_;
+        public static FormSoluciones FormSoluciones_;
+        public static FormFin FormFin_;
+        public static FormInicio FormInicio_;
+
+        #endregion
+
+        #region CONSTRUCTOR
+        static Global()
+        {
+            listaPiezas = new Pieza[8]{
                                                             new Reina(ColorPieza.NEGRO),
                                                             new Torre(ColorPieza.BLANCO),
                                                             new Torre(ColorPieza.NEGRO),
@@ -37,17 +54,27 @@ namespace TP_LP2
                                                             new Caballo(ColorPieza.BLANCO),
                                                             new Caballo(ColorPieza.NEGRO)
                                                         };
-        public static int piezasAgregadas = 0;
-        public static Tablero tableroAmenazas = new Tablero();
-        public static Tablero tableroPiezas = new Tablero();
-        public static int TABLEROSMAX = 0;
-        public const int PODAREY = 5;
-        public const int PODACABALLO = 5;
-        public const int PODAALFIL = 7;
-        public static MainForm MainForm_ = new MainForm();
-        public static FormUnicaSolucion FormUnicaSolucion_ = new FormUnicaSolucion();
+            piezasAgregadas = 0;
 
+            tableroAmenazas = new Tablero();
+            tableroPiezas = new Tablero();
 
+            TABLEROSMAX = 0;
+
+            PODAREY = 5;
+            PODACABALLO = 4;
+            PODAALFIL = 5;
+
+            MainForm_ = new MainForm();
+            FormUnicaSolucion_ = new FormUnicaSolucion();
+            FormSoluciones_ = new FormSoluciones();
+            FormFin_ = new FormFin();
+            FormInicio_ = new FormInicio();
+        }
+
+        #endregion
+
+        #region MÉTODOS_POS
         public static Pos[] sacarPosRepetidas(Pos[] arrayPos)
         {
             return arrayPos.Distinct().ToArray();
@@ -64,6 +91,7 @@ namespace TP_LP2
             else
                 return arrayPos;
         }
+        #endregion
     }
     public struct Pos
     {
