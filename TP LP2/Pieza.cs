@@ -37,8 +37,6 @@ namespace TP_LP2
             {
                 if (Global.tableroPiezas.setCaracter(simbolo, mejoresPos[i]))//agregamos la pieza
                 {
-                    Console.WriteLine(simbolo.ToString());
-
                     actualizarAmenazas(); //actualizamos las amenazas de esta y todas las otras piezas
 
                     Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución

@@ -34,7 +34,7 @@ namespace TP_LP2
             // 
             // btnSiguiente
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(599, 414);
+            this.btnSiguiente.Location = new System.Drawing.Point(584, 453);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(137, 23);
             this.btnSiguiente.TabIndex = 0;

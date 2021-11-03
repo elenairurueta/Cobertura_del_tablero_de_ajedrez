@@ -29,6 +29,7 @@ namespace TP_LP2
             /* Si puede colocar el símbolo (no hay otra pieza) al tablero en la posición, 
 			devuelve true. En el caso en que en esa posición hubiere una Torre ("T") y se
 			quiera agregar el rey ("K") se pueden apilar y colocar una "X" */
+
             if (posicion.x <= 7 && posicion.x >= 0 && posicion.y <= 7 && posicion.y >= 0)
             {
 
@@ -43,6 +44,10 @@ namespace TP_LP2
                 else if (tablero[posicion.x, posicion.y] == 'K' && simbolo == 'T')
                 {
                     tablero[posicion.x, posicion.y] = 'X';
+                }
+                else if(simbolo == 'L' || simbolo == 'F') //en este caso se pueden pisar
+                {
+                    tablero[posicion.x, posicion.y] = simbolo;
                 }
                 else
                     return false;

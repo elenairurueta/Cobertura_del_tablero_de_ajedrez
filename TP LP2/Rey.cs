@@ -19,8 +19,10 @@ namespace TP_LP2
                 posAux.x++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0') 
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F') 
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -29,8 +31,10 @@ namespace TP_LP2
                 posAux.y++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -40,8 +44,10 @@ namespace TP_LP2
                 posAux.y++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -50,8 +56,10 @@ namespace TP_LP2
                 posAux.x--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -61,8 +69,10 @@ namespace TP_LP2
                 posAux.x--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -71,8 +81,10 @@ namespace TP_LP2
                 posAux.y--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -82,8 +94,10 @@ namespace TP_LP2
                 posAux.y--;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }
@@ -92,8 +106,10 @@ namespace TP_LP2
                 posAux.x++;
                 if (Global.tableroPiezas.getCaracter(posAux) != '0')
                 {
-                    if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                    if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                    {
                         Global.tableroAmenazas.setCaracter('L', posAux);
+                    }
                 }
                 else Global.tableroAmenazas.setCaracter('F', posAux);
             }

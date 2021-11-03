@@ -32,6 +32,7 @@ namespace TP_LP2
         public static int PODAREY;
         public static int PODACABALLO;
         public static int PODAALFIL;
+        public static int PODATORRE;
 
         public static MainForm MainForm_;
         public static FormUnicaSolucion FormUnicaSolucion_;
@@ -47,12 +48,12 @@ namespace TP_LP2
             listaPiezas = new Pieza[8]{
                                                             new Reina(ColorPieza.NEGRO),
                                                             new Torre(ColorPieza.BLANCO),
-                                                            new Torre(ColorPieza.NEGRO),
                                                             new Alfil(ColorPieza.BLANCO),
+                                                            new Torre(ColorPieza.NEGRO),
                                                             new Alfil(ColorPieza.NEGRO),
+                                                            new Caballo(ColorPieza.NEGRO),
                                                             new Rey(ColorPieza.BLANCO),
                                                             new Caballo(ColorPieza.BLANCO),
-                                                            new Caballo(ColorPieza.NEGRO)
                                                         };
             piezasAgregadas = 0;
 
@@ -64,6 +65,7 @@ namespace TP_LP2
             PODAREY = 5;
             PODACABALLO = 4;
             PODAALFIL = 5;
+            PODATORRE = 4;
 
             MainForm_ = new MainForm();
             FormUnicaSolucion_ = new FormUnicaSolucion();

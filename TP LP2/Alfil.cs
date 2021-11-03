@@ -22,12 +22,16 @@ namespace TP_LP2
                 do
                 {
                     posAux.y++; posAux.x++;
-                    if (Global.tableroPiezas.getCaracter(posAux) != '0') //si en el camino nos encontramos con una pieza
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    { //si en el camino nos encontramos con una pieza
                         seguirFatal = false; //todos los ataques restantes serán leves
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x < 7);
@@ -42,11 +46,15 @@ namespace TP_LP2
                 {
                     posAux.y--; posAux.x++;
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
                         seguirFatal = false;
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x < 7);
@@ -61,11 +69,15 @@ namespace TP_LP2
                 {
                     posAux.y++; posAux.x--;
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
                         seguirFatal = false;
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y < 7 && posAux.x > 0);
@@ -80,11 +92,15 @@ namespace TP_LP2
                 {
                     posAux.y--; posAux.x--;
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
                         seguirFatal = false;
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y > 0 && posAux.x > 0);

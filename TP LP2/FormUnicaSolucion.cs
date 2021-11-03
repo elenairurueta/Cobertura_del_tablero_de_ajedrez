@@ -45,6 +45,7 @@ namespace TP_LP2
                     tableroPiezas[i, j].Location = new Point(x, y); tableroAmenazas[i, j].Location = new Point(x + 500, y);
                     tableroPiezas[i, j].Size = new Size(50, 50); tableroAmenazas[i, j].Size = new Size(50, 50);
                     tableroPiezas[i, j].BackColor = Convert.ToInt32(tableroPiezas[i, j].Tag) % 2 == 0 ? Color.White : Color.Black; tableroAmenazas[i, j].BackColor = Color.White;
+                    tableroAmenazas[i, j].BorderStyle = BorderStyle.FixedSingle;
                     this.Controls.Add(tableroPiezas[i, j]); this.Controls.Add(tableroAmenazas[i, j]);
                     x += 50;
                     pctBoxAmenazas++; pctBoxPiezas++;

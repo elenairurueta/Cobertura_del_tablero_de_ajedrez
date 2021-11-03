@@ -22,12 +22,16 @@ namespace TP_LP2
                 do
                 {
                     posAux.y--; //vamos para arriba
-                    if (Global.tableroPiezas.getCaracter(posAux) != '0') //si hay una pieza
-                        seguirFatal = false; //todo el resto del ataque va a ser leve
+                    if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {//si hay una pieza
+                        seguirFatal = false;
+                    } //todo el resto del ataque va a ser leve
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F') //pero si ya está siendo atacada de forma fatal, le gana al leve
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        { //pero si ya está siendo atacada de forma fatal, le gana al leve
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux); //sino, ataque fatal
                 } while (posAux.y > 0); //mientras que no nos pasemos del tablero
@@ -42,11 +46,15 @@ namespace TP_LP2
                 {
                     posAux.y++;
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
                         seguirFatal = false;
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.y < 7);
@@ -61,11 +69,15 @@ namespace TP_LP2
                 {
                     posAux.x++;
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
                         seguirFatal = false;
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.x < 7);
@@ -80,11 +92,15 @@ namespace TP_LP2
                 {
                     posAux.x--;
                     if (Global.tableroPiezas.getCaracter(posAux) != '0')
+                    {
                         seguirFatal = false;
+                    }
                     if (seguirFatal == false)
                     {
-                        if (Global.tableroPiezas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+                        }
                     }
                     else Global.tableroAmenazas.setCaracter('F', posAux);
                 } while (posAux.x > 0);
@@ -111,14 +127,18 @@ namespace TP_LP2
         public override Pos[] getMejoresPos()
         {
             //nuestras mejores posiciones para la torre: las esquinas (si queremos aumentar el número de tableros, esto se podría cambiar)
-            Pos[] mejoresPos = new Pos[4];
+            Pos[] mejoresPos = new Pos[6];
             mejoresPos[0].x = 0; mejoresPos[0].y = 7;
             mejoresPos[1].x = 7; mejoresPos[1].y = 0;
             mejoresPos[2].x = 0; mejoresPos[2].y = 0;
             mejoresPos[3].x = 7; mejoresPos[3].y = 7;
+            mejoresPos[4].x = 6; mejoresPos[4].y = 0;
+            mejoresPos[5].x = 0; mejoresPos[5].y = 6;
 
             //ordenamos estas posiciones según cuántos casilleros amenazaría la torre si se colocara en cada una (de mayor -más conveniente- a menor)
-            return ordenarPosSegunCuantasAmenazan(mejoresPos);
+            mejoresPos = ordenarPosSegunCuantasAmenazan(mejoresPos);
+            return Global.devolverNprimerasPos(Global.PODATORRE, mejoresPos);
+
         }
     }
 }
