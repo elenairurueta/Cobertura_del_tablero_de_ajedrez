@@ -14,6 +14,7 @@ namespace TP_LP2
         private char[,] tablero = new char[8, 8];
         private static Tablero[] listaTablerosSolucion = new Tablero[] { };
         public static int tablerosSolucion = 0;
+        public event EventHandler<ArgsTableros> OnSolution; //para avisarle al form cuando encontramos una nueva solución
         #endregion
 
         #region CONSTRUCTOR
@@ -63,19 +64,18 @@ namespace TP_LP2
 
         #endregion
 
-        public static void agregarSolucion(Tablero tableroPiezas, Tablero tableroAmenazas, bool rotarEspejar = true)
+        private void agregarSolucion(Tablero tableroPiezas, Tablero tableroAmenazas, bool rotarEspejar = true)
         {
             Tablero tableroAgregar = new Tablero(); tableroAgregar = tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
 
-            if (!tableroAgregar.yaSeEncuentraEnLista())
+            if (!tableroAgregar.seEncuentraEnLista())
             {
                 listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
                 tablerosSolucion++;
-                Tablero.imprimirTableros();
+                OnSolution?.Invoke(this, new ArgsTableros(Global.tableroPiezas, Global.tableroAmenazas));
                 if (rotarEspejar) tableroPiezas.rotarEspejarSolucion();
             }
         }
-
         //si todos los casilleros del tableroAmenazas tienen 1, devuelve true.
         public bool esSolucion()
         {
@@ -88,6 +88,7 @@ namespace TP_LP2
                 }
             }
             agregarSolucion(Global.tableroPiezas, Global.tableroAmenazas);
+
             return true;
         }
 
@@ -153,7 +154,7 @@ namespace TP_LP2
         }
 
         //si el tablero ya se encuentra en la lista de tableros solución, devuelve true
-        public bool yaSeEncuentraEnLista()
+        public bool seEncuentraEnLista()
         {
             bool igual = true;
             for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
@@ -178,7 +179,7 @@ namespace TP_LP2
 
         }
 
-        public static void imprimirTableros()
+        public static void imprimirTableros(Tablero tableroPiezas, Tablero tableroAmenazas)
         {
 
             string nombreImagen; Pos posicion;
@@ -189,7 +190,7 @@ namespace TP_LP2
                 for (int i = 0; i < 8; i++)
                 {
                     posicion.x = i; posicion.y = j;
-                    switch (Global.tableroPiezas.tablero[i, j])
+                    switch (tableroPiezas.tablero[i, j])
                     {
                         case 'Q':
                             nombreImagen = "Img\\Reina" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
@@ -214,7 +215,7 @@ namespace TP_LP2
                         default:
                             break;
                     }
-                    switch (Global.tableroAmenazas.tablero[i, j])
+                    switch (tableroAmenazas.tablero[i, j])
                     {
                         case 'L':
                             Global.FormUnicaSolucion_.setBackgroundColor(Color.Yellow, posicion);
@@ -281,6 +282,16 @@ namespace TP_LP2
                     tablero[i, j] = '0';
                 }
             }
+        }
+    }
+    public struct ArgsTableros
+    {
+        public Tablero tableroPiezas_;
+        public Tablero tableroAmenazas_;
+        public ArgsTableros(Tablero tableroPiezas, Tablero tableroAmenazas)
+        {
+            tableroPiezas_ = tableroPiezas;
+            tableroAmenazas_ = tableroAmenazas;
         }
     }
 }

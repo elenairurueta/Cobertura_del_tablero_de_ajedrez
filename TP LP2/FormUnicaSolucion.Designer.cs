@@ -30,6 +30,7 @@ namespace TP_LP2
         private void InitializeComponent()
         {
             this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnIniciar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSiguiente
@@ -40,13 +41,25 @@ namespace TP_LP2
             this.btnSiguiente.TabIndex = 0;
             this.btnSiguiente.Text = "Siguiente Solución";
             this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Visible = false;
             this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.Location = new System.Drawing.Point(584, 453);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(137, 23);
+            this.btnIniciar.TabIndex = 1;
+            this.btnIniciar.Text = "Iniciar";
+            this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
             // 
             // FormUnicaSolucion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1324, 608);
+            this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.btnSiguiente);
             this.Name = "FormUnicaSolucion";
             this.Text = "MainForm";
@@ -58,5 +71,6 @@ namespace TP_LP2
         #endregion
 
         private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnIniciar;
     }
 }

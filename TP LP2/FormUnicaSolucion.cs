@@ -14,13 +14,12 @@ namespace TP_LP2
     {
         private PictureBox[,] tableroPiezas;
         private PictureBox[,] tableroAmenazas;
-        bool Inicio;
+        private ArgsTableros[] tablerosImprimir = new ArgsTableros[] { };
         public FormUnicaSolucion()
         {
             InitializeComponent();
             tableroPiezas = new PictureBox[8, 8];
             tableroAmenazas = new PictureBox[8, 8];
-            Inicio = true;
         }
 
         public string pctBoxNamePiezas = "pctBoxPiezas";
@@ -92,9 +91,24 @@ namespace TP_LP2
         }
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            if(Inicio)
-                Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
-            //TODO: cómo hacer para que espere a que se apriete el botón para mostrar otras soluciones??
+            Tablero.imprimirTableros(tablerosImprimir[0].tableroPiezas_, tablerosImprimir[0].tableroAmenazas_);
+            ArgsTableros[] tableroQuitar = new ArgsTableros[1] { tablerosImprimir[0] };
+            this.tablerosImprimir = tablerosImprimir.Except(tableroQuitar).ToArray();
+            btnSiguiente.Enabled = false;
+        }
+
+        private void TableroAmenazas_OnSolution(object sender, ArgsTableros tablerosSolucion)
+        {
+            tablerosImprimir = tablerosImprimir.Append(tablerosSolucion).ToArray();
+            btnSiguiente.Enabled = true;
+        }
+
+        private void btnIniciar_Click(object sender, EventArgs e)
+        {
+            Global.tableroAmenazas.OnSolution += TableroAmenazas_OnSolution;
+            btnIniciar.Visible = false;
+            btnSiguiente.Visible = true; btnSiguiente.Enabled = false;
+            Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
         }
     }
 }
