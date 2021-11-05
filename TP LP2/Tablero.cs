@@ -68,12 +68,14 @@ namespace TP_LP2
         {
             Tablero tableroAgregar = new Tablero(); tableroAgregar = tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
 
-            if (!tableroAgregar.seEncuentraEnLista())
+            if (!listaTablerosSolucion.Contains(tableroAgregar))
             {
                 listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
                 tablerosSolucion++;
                 OnSolution?.Invoke(this, new ArgsTableros(Global.tableroPiezas, Global.tableroAmenazas));
-                if (rotarEspejar) tableroPiezas.rotarEspejarSolucion();
+                //if (listaTablerosSolucion.Length == Global.TABLEROSMAX)
+                //    throw new Exception("ALL_FOUND");
+                if (rotarEspejar) rotarEspejarSolucion();
             }
         }
         //si todos los casilleros del tableroAmenazas tienen 1, devuelve true.
@@ -93,13 +95,13 @@ namespace TP_LP2
         }
 
         //rota y espeja el tablero solución generando la mayor cantidad de soluciones posibles a partir de esta
-        private void rotarEspejarSolucion()
+        private static void rotarEspejarSolucion()
         {
             Tablero nuevaSolucionPiezas; Tablero nuevaSolucionAmenazas;
 
             #region ROTACIÓN_DERECHA
 
-            char[,] tableroAuxAmenazas = this.tablero;
+            char[,] tableroAuxAmenazas = Global.tableroAmenazas.tablero;
             char[,] tableroAuxPiezas = Global.tableroPiezas.tablero;
 
             for (int i = 0; i < 3; i++)
@@ -115,7 +117,7 @@ namespace TP_LP2
                         nuevaSolucionAmenazas.tablero[y, 8 - 1 - x] = tableroAuxAmenazas[x, y];
                     }
                 }
-                agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+                Global.tableroAmenazas.agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
                 tableroAuxAmenazas = nuevaSolucionAmenazas.tablero;
                 tableroAuxPiezas = nuevaSolucionPiezas.tablero;
             }
@@ -131,10 +133,10 @@ namespace TP_LP2
                 for (int y = 0; y < 8; y++)
                 {
                     nuevaSolucionPiezas.tablero[x, y] = Global.tableroPiezas.tablero[y, x];
-                    nuevaSolucionAmenazas.tablero[x, y] = this.tablero[y, x];
+                    nuevaSolucionAmenazas.tablero[x, y] = Global.tableroAmenazas.tablero[y, x];
                 }
             }
-            agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+            Global.tableroAmenazas.agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
 
             #endregion
 
@@ -145,39 +147,39 @@ namespace TP_LP2
                 for (int y = 0; y < 8; y++)
                 {
                     nuevaSolucionPiezas.tablero[x, y] = Global.tableroPiezas.tablero[7 - y, 7 - x];
-                    nuevaSolucionAmenazas.tablero[x, y] = this.tablero[7 - y, 7 - x];
+                    nuevaSolucionAmenazas.tablero[x, y] = Global.tableroAmenazas.tablero[7 - y, 7 - x];
                 }
             }
-            agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+            Global.tableroAmenazas.agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
 
             #endregion
         }
 
         //si el tablero ya se encuentra en la lista de tableros solución, devuelve true
-        public bool seEncuentraEnLista()
-        {
-            bool igual = true;
-            for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    for (int k = 0; k < 8; k++)
-                    {
-                        if (tablero[j, k] != listaTablerosSolucion[i].tablero[j, k])
-                        {
-                            igual = false;
-                            break;
-                        }
-                    }
-                    if (!igual)
-                        break;
-                }
-                if (igual)
-                    return true;
-            }
-            return false;
+        //public bool seEncuentraEnLista()
+        //{
+        //    bool igual = true;
+        //    for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
+        //    {
+        //        for (int j = 0; j < 8; j++)
+        //        {
+        //            for (int k = 0; k < 8; k++)
+        //            {
+        //                if (tablero[j, k] != listaTablerosSolucion[i].tablero[j, k])
+        //                {
+        //                    igual = false;
+        //                    break;
+        //                }
+        //            }
+        //            if (!igual)
+        //                break;
+        //        }
+        //        if (igual)
+        //            return true;
+        //    }
+        //    return false;
 
-        }
+        //}
 
         public static void imprimirTableros(Tablero tableroPiezas, Tablero tableroAmenazas)
         {
@@ -262,14 +264,8 @@ namespace TP_LP2
         //Elimina esa letra en la pos en el tablero
         public void limpiarTablero(Pos pos, char letra = ' ')
         {
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (tablero[i, j] == letra || letra == ' ')
-                        tablero[i, j] = '0';
-                }
-            }
+            if (tablero[pos.x, pos.y] == letra || letra == ' ')
+                tablero[pos.x, pos.y] = '0';
         }
 
         //Vacía el tablero

@@ -27,12 +27,13 @@ namespace TP_LP2
                         if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
                         {
                             Global.tableroAmenazas.setCaracter('L', posAux);
+
                         }
                     }
                     if (posAux.x > 1)
                     {
                         posAux.x -= 2;
-                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F')
+                        if (Global.tableroAmenazas.getCaracter(posAux) != 'F') 
                         {
                             Global.tableroAmenazas.setCaracter('L', posAux);
                         }

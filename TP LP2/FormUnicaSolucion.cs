@@ -15,6 +15,7 @@ namespace TP_LP2
         private PictureBox[,] tableroPiezas;
         private PictureBox[,] tableroAmenazas;
         private ArgsTableros[] tablerosImprimir = new ArgsTableros[] { };
+        private int contadorImpresos = 0;
         public FormUnicaSolucion()
         {
             InitializeComponent();
@@ -91,10 +92,16 @@ namespace TP_LP2
         }
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            Tablero.imprimirTableros(tablerosImprimir[0].tableroPiezas_, tablerosImprimir[0].tableroAmenazas_);
+            Tablero.imprimirTableros(tablerosImprimir[0].tableroPiezas_, tablerosImprimir[0].tableroAmenazas_); contadorImpresos++;
             ArgsTableros[] tableroQuitar = new ArgsTableros[1] { tablerosImprimir[0] };
             this.tablerosImprimir = tablerosImprimir.Except(tableroQuitar).ToArray();
             btnSiguiente.Enabled = false;
+            if (contadorImpresos == Global.TABLEROSMAX)
+            {
+                Global.FormFin_.Show();
+                this.Close();
+            }
+
         }
 
         private void TableroAmenazas_OnSolution(object sender, ArgsTableros tablerosSolucion)
@@ -108,7 +115,9 @@ namespace TP_LP2
             Global.tableroAmenazas.OnSolution += TableroAmenazas_OnSolution;
             btnIniciar.Visible = false;
             btnSiguiente.Visible = true; btnSiguiente.Enabled = false;
+            
             Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
+            
         }
     }
 }
