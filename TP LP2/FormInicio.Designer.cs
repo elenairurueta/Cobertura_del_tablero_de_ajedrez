@@ -74,6 +74,7 @@ namespace TP_LP2
             this.Controls.Add(this.btnIniciar);
             this.Name = "FormInicio";
             this.Text = "FormInicio";
+            this.Load += new System.EventHandler(this.FormInicio_Load);
             this.ResumeLayout(false);
 
         }

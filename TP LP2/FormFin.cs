@@ -31,5 +31,10 @@ namespace TP_LP2
             Global.MainForm_.Close();
             this.Close();
         }
+
+        private void FormFin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

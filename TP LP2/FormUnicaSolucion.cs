@@ -106,7 +106,11 @@ namespace TP_LP2
 
         private void TableroAmenazas_OnSolution(object sender, ArgsTableros tablerosSolucion)
         {
-            tablerosImprimir = tablerosImprimir.Append(tablerosSolucion).ToArray();
+            ArgsTableros tablerosImprimirAux = new ArgsTableros { tableroAmenazas_ = new Tablero(), tableroPiezas_ = new Tablero() };
+            tablerosImprimirAux.tableroPiezas_.copyFrom(tablerosSolucion.tableroPiezas_);
+            tablerosImprimirAux.tableroAmenazas_.copyFrom(tablerosSolucion.tableroAmenazas_);
+
+            this.tablerosImprimir = tablerosImprimir.Append(tablerosImprimirAux).ToArray();
             btnSiguiente.Enabled = true;
         }
 

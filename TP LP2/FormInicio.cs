@@ -32,5 +32,10 @@ namespace TP_LP2
         {
             MessageBox.Show("Nuestro algoritmo se basa en backtracking...");
         }
+
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -66,13 +66,15 @@ namespace TP_LP2
 
         private void agregarSolucion(Tablero tableroPiezas, Tablero tableroAmenazas, bool rotarEspejar = true)
         {
-            Tablero tableroAgregar = new Tablero(); tableroAgregar = tableroPiezas; //para que al cambiar tableroPiezas no se cambien los tableros solución
+            Tablero tableroAgregarPiezas = new Tablero(); tableroAgregarPiezas.copyFrom(tableroPiezas);
+            Tablero tableroAgregarAmenazas = new Tablero(); tableroAgregarAmenazas.copyFrom(tableroAmenazas);
 
-            if (!listaTablerosSolucion.Contains(tableroAgregar))
+
+            if (!tableroAgregarPiezas.seEncuentraEnLista())
             {
-                listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregar).ToArray();
+                listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregarPiezas).ToArray();
                 tablerosSolucion++;
-                OnSolution?.Invoke(this, new ArgsTableros(Global.tableroPiezas, Global.tableroAmenazas));
+                OnSolution?.Invoke(this, new ArgsTableros(tableroAgregarPiezas, tableroAgregarAmenazas));
                 //if (listaTablerosSolucion.Length == Global.TABLEROSMAX)
                 //    throw new Exception("ALL_FOUND");
                 if (rotarEspejar) rotarEspejarSolucion();
@@ -117,7 +119,7 @@ namespace TP_LP2
                         nuevaSolucionAmenazas.tablero[y, 8 - 1 - x] = tableroAuxAmenazas[x, y];
                     }
                 }
-                Global.tableroAmenazas.agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+                Global.tableroAmenazas.agregarSolucion(nuevaSolucionPiezas, nuevaSolucionAmenazas, false);
                 tableroAuxAmenazas = nuevaSolucionAmenazas.tablero;
                 tableroAuxPiezas = nuevaSolucionPiezas.tablero;
             }
@@ -136,7 +138,7 @@ namespace TP_LP2
                     nuevaSolucionAmenazas.tablero[x, y] = Global.tableroAmenazas.tablero[y, x];
                 }
             }
-            Global.tableroAmenazas.agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+            Global.tableroAmenazas.agregarSolucion(nuevaSolucionPiezas, nuevaSolucionAmenazas, false);
 
             #endregion
 
@@ -150,36 +152,36 @@ namespace TP_LP2
                     nuevaSolucionAmenazas.tablero[x, y] = Global.tableroAmenazas.tablero[7 - y, 7 - x];
                 }
             }
-            Global.tableroAmenazas.agregarSolucion(nuevaSolucionAmenazas, nuevaSolucionAmenazas, false);
+            Global.tableroAmenazas.agregarSolucion(nuevaSolucionPiezas, nuevaSolucionAmenazas, false);
 
             #endregion
         }
 
         //si el tablero ya se encuentra en la lista de tableros solución, devuelve true
-        //public bool seEncuentraEnLista()
-        //{
-        //    bool igual = true;
-        //    for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
-        //    {
-        //        for (int j = 0; j < 8; j++)
-        //        {
-        //            for (int k = 0; k < 8; k++)
-        //            {
-        //                if (tablero[j, k] != listaTablerosSolucion[i].tablero[j, k])
-        //                {
-        //                    igual = false;
-        //                    break;
-        //                }
-        //            }
-        //            if (!igual)
-        //                break;
-        //        }
-        //        if (igual)
-        //            return true;
-        //    }
-        //    return false;
+        public bool seEncuentraEnLista()
+        {
+            bool igual = true;
+            for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int k = 0; k < 8; k++)
+                    {
+                        if (tablero[j, k] != listaTablerosSolucion[i].tablero[j, k])
+                        {
+                            igual = false;
+                            break;
+                        }
+                    }
+                    if (!igual)
+                        break;
+                }
+                if (igual)
+                    return true;
+            }
+            return false;
 
-        //}
+        }
 
         public static void imprimirTableros(Tablero tableroPiezas, Tablero tableroAmenazas)
         {
@@ -196,23 +198,23 @@ namespace TP_LP2
                     {
                         case 'Q':
                             nombreImagen = "Img\\Reina" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
                             break;
                         case 'T':
                             nombreImagen = "Img\\Torre" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
                             break;
                         case 'A':
                             nombreImagen = "Img\\Alfil" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
                             break;
                         case 'C':
                             nombreImagen = "Img\\Caballo" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
                             break;
                         case 'K':
                             nombreImagen = "Img\\Rey" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
                             break;
                         default:
                             break;
@@ -276,6 +278,16 @@ namespace TP_LP2
                 for (int j = 0; j < 8; j++)
                 {
                     tablero[i, j] = '0';
+                }
+            }
+        }
+        public void copyFrom(Tablero tableroCopiar)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    this.tablero[i, j] = tableroCopiar.tablero[i, j];
                 }
             }
         }

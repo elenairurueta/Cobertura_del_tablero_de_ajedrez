@@ -89,6 +89,7 @@ namespace TP_LP2
             this.Controls.Add(this.instFin);
             this.Name = "FormFin";
             this.Text = "FormFin";
+            this.Load += new System.EventHandler(this.FormFin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
