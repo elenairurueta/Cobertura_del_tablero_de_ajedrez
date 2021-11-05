@@ -19,6 +19,7 @@ namespace TP_LP2
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
+            Global.MainForm_ = new MainForm();
             Global.MainForm_.Show();
             this.Hide();
         }

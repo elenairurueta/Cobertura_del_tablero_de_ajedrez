@@ -19,8 +19,9 @@ namespace TP_LP2
 
         private void btnSi_CheckedChanged(object sender, EventArgs e)
         {
+            Global.FormSoluciones_ = new FormSoluciones();
             Global.FormSoluciones_.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void btnNo_CheckedChanged(object sender, EventArgs e)

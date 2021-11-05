@@ -54,19 +54,12 @@ namespace TP_LP2
                 x = 100;
             }
         }
-        public void setImagen(string imagen, Pos posicion, bool piezas = true)
+        public void setImagen(string imagen, Pos posicion)
         {
             Image newImage = Image.FromFile(imagen);
-            if (piezas)
-            {
-                tableroPiezas[posicion.x, posicion.y].Image = newImage;
-                tableroPiezas[posicion.x, posicion.y].SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-            else
-            {
-                tableroAmenazas[posicion.x, posicion.y].Image = newImage;
-                tableroAmenazas[posicion.x, posicion.y].SizeMode = PictureBoxSizeMode.StretchImage;
-            }
+
+            tableroPiezas[posicion.x, posicion.y].Image = newImage;
+            tableroPiezas[posicion.x, posicion.y].SizeMode = PictureBoxSizeMode.StretchImage;
         }
         public Color getColor(Pos posicion)
         {
@@ -86,6 +79,7 @@ namespace TP_LP2
                 for (int i = 0; i < 8; i++)
                 {
                     tableroPiezas[i, j].BackColor = Convert.ToInt32(tableroPiezas[i, j].Tag) % 2 == 0 ? Color.White : Color.Black;
+                    tableroPiezas[i, j].Image = null;
                     tableroAmenazas[i, j].BackColor = Color.White;
                 }
             }
@@ -93,15 +87,18 @@ namespace TP_LP2
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
             Tablero.imprimirTableros(tablerosImprimir[0].tableroPiezas_, tablerosImprimir[0].tableroAmenazas_); contadorImpresos++;
-            ArgsTableros[] tableroQuitar = new ArgsTableros[1] { tablerosImprimir[0] };
-            this.tablerosImprimir = tablerosImprimir.Except(tableroQuitar).ToArray();
-            btnSiguiente.Enabled = false;
+
+            ArgsTableros[] tableroQuitar = new ArgsTableros[1] { tablerosImprimir[0] }; this.tablerosImprimir = tablerosImprimir.Except(tableroQuitar).ToArray();
+
+            if (tablerosImprimir.Length == 0)
+            {
+                btnSiguiente.Enabled = false; setProgressBar(0);
+            }
             if (contadorImpresos == Global.TABLEROSMAX)
             {
-                Global.FormFin_.Show();
-                this.Close();
-            }
+                btnSiguiente.Visible = false; btnFinalizar.Visible = true;
 
+            }
         }
 
         private void TableroAmenazas_OnSolution(object sender, ArgsTableros tablerosSolucion)
@@ -111,7 +108,7 @@ namespace TP_LP2
             tablerosImprimirAux.tableroAmenazas_.copyFrom(tablerosSolucion.tableroAmenazas_);
 
             this.tablerosImprimir = tablerosImprimir.Append(tablerosImprimirAux).ToArray();
-            btnSiguiente.Enabled = true;
+            btnSiguiente.Enabled = true; setProgressBar(100);
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
@@ -119,9 +116,36 @@ namespace TP_LP2
             Global.tableroAmenazas.OnSolution += TableroAmenazas_OnSolution;
             btnIniciar.Visible = false;
             btnSiguiente.Visible = true; btnSiguiente.Enabled = false;
-            
+            setProgressBar(0);
             Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
             
+        }
+
+        public void setProgressBar(int value, bool sumar = false)
+        {
+            if (sumar)
+            {
+                if (progressBar.Value < 90)
+                {
+                    progressBar.Value += value;
+                }
+            }
+            else
+            {
+                progressBar.Value = value;
+            }
+        }
+
+        private void progressBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            Global.FormFin_ = new FormFin();
+            Global.FormFin_.Show();
+            this.Close();
         }
     }
 }

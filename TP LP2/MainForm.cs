@@ -24,6 +24,7 @@ namespace TP_LP2
         private void btn1_Click(object sender, EventArgs e)
         {
             Global.TABLEROSMAX = 1;
+            Global.FormUnicaSolucion_ = new FormUnicaSolucion();
             Global.FormUnicaSolucion_.Show();
             this.Hide();
 
@@ -32,6 +33,7 @@ namespace TP_LP2
         private void btn5_Click(object sender, EventArgs e)
         {
             Global.TABLEROSMAX = 5;
+            Global.FormUnicaSolucion_ = new FormUnicaSolucion();
             Global.FormUnicaSolucion_.Show();
             this.Hide();
 
@@ -40,6 +42,7 @@ namespace TP_LP2
         private void btn10_Click(object sender, EventArgs e)
         {
             Global.TABLEROSMAX = 10;
+            Global.FormUnicaSolucion_ = new FormUnicaSolucion();
             Global.FormUnicaSolucion_.Show();
             this.Hide();
 

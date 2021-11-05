@@ -72,6 +72,7 @@ namespace TP_LP2
 
             if (!tableroAgregarPiezas.seEncuentraEnLista())
             {
+                Global.FormUnicaSolucion_.setProgressBar(90);
                 listaTablerosSolucion = listaTablerosSolucion.Append(tableroAgregarPiezas).ToArray();
                 tablerosSolucion++;
                 OnSolution?.Invoke(this, new ArgsTableros(tableroAgregarPiezas, tableroAgregarAmenazas));
@@ -198,23 +199,23 @@ namespace TP_LP2
                     {
                         case 'Q':
                             nombreImagen = "Img\\Reina" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'T':
                             nombreImagen = "Img\\Torre" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'A':
                             nombreImagen = "Img\\Alfil" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'C':
                             nombreImagen = "Img\\Caballo" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         case 'K':
                             nombreImagen = "Img\\Rey" + ((Global.FormUnicaSolucion_.getColor(posicion) == Color.White) ? "N" : "B") + ".png";
-                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion, true);
+                            Global.FormUnicaSolucion_.setImagen(nombreImagen, posicion);
                             break;
                         default:
                             break;

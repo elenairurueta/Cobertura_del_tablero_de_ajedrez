@@ -67,10 +67,6 @@ namespace TP_LP2
             PODAALFIL = 5;
             PODATORRE = 4;
 
-            MainForm_ = new MainForm();
-            FormUnicaSolucion_ = new FormUnicaSolucion();
-            FormSoluciones_ = new FormSoluciones();
-            FormFin_ = new FormFin();
             FormInicio_ = new FormInicio();
         }
 
