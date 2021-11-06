@@ -48,23 +48,11 @@
   <ItemGroup>
     <Compile Include="Alfil.cs" />
     <Compile Include="Caballo.cs" />
-    <Compile Include="FormFin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormFin.Designer.cs">
-      <DependentUpon>FormFin.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormInicio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormInicio.Designer.cs">
       <DependentUpon>FormInicio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormSoluciones.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSoluciones.Designer.cs">
-      <DependentUpon>FormSoluciones.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -85,14 +73,8 @@
     <Compile Include="Rey.cs" />
     <Compile Include="Tablero.cs" />
     <Compile Include="Torre.cs" />
-    <EmbeddedResource Include="FormFin.resx">
-      <DependentUpon>FormFin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormInicio.resx">
       <DependentUpon>FormInicio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSoluciones.resx">
-      <DependentUpon>FormSoluciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUnicaSolucion.resx">
       <DependentUpon>FormUnicaSolucion.cs</DependentUpon>

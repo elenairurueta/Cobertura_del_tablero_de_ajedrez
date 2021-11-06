@@ -143,8 +143,7 @@ namespace TP_LP2
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            Global.FormFin_ = new FormFin();
-            Global.FormFin_.Show();
+            Global.FormInicio_.Show();
             this.Close();
         }
     }

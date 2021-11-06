@@ -36,8 +36,7 @@ namespace TP_LP2
 
         public static MainForm MainForm_;
         public static FormUnicaSolucion FormUnicaSolucion_;
-        public static FormSoluciones FormSoluciones_;
-        public static FormFin FormFin_;
+
         public static FormInicio FormInicio_;
 
         #endregion
