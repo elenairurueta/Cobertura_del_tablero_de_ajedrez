@@ -41,7 +41,7 @@ namespace TP_LP2
 
                     Global.tableroAmenazas.esSolucion();//si es solución se agrega el tablero a la lista de tableros solución
                     
-                    if ((Global.piezasAgregadas < Global.listaPiezas.Length)&&(Tablero.tablerosSolucion < Global.TABLEROSMAX))//si todavía no se colocaron todas las piezas y no se generaron todos los tableros, se coloca la siguiente
+                    if ((Global.piezasAgregadas < Global.listaPiezas.Length) && (Tablero.tablerosSolucion < Global.TABLEROSMAX))//si todavía no se colocaron todas las piezas y no se generaron todos los tableros, se coloca la siguiente
                     {
                         Global.listaPiezas[Global.piezasAgregadas++].colocarPieza();
                         Global.FormUnicaSolucion_.setProgressBar(5, true);

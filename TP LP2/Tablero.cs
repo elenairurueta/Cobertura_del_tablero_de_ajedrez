@@ -12,10 +12,11 @@ namespace TP_LP2
     {
         #region ATRIBUTOS
         private char[,] tablero = new char[8, 8];
-        private static Tablero[] listaTablerosSolucion = new Tablero[] { };
+        public static Tablero[] listaTablerosSolucion = new Tablero[] { };
         public static int tablerosSolucion = 0;
         public event EventHandler<ArgsTableros> OnSolution; //para avisarle al form cuando encontramos una nueva solución
         #endregion
+         
 
         #region CONSTRUCTOR
         public Tablero()
@@ -78,7 +79,7 @@ namespace TP_LP2
                 OnSolution?.Invoke(this, new ArgsTableros(tableroAgregarPiezas, tableroAgregarAmenazas));
                 //if (listaTablerosSolucion.Length == Global.TABLEROSMAX)
                 //    throw new Exception("ALL_FOUND");
-                if (rotarEspejar) rotarEspejarSolucion();
+                //if (rotarEspejar) rotarEspejarSolucion();
             }
         }
         //si todos los casilleros del tableroAmenazas tienen 1, devuelve true.
@@ -162,7 +163,7 @@ namespace TP_LP2
         public bool seEncuentraEnLista()
         {
             bool igual = true;
-            for (int i = 0; i < tablerosSolucion; i++) //TODO: TRES FORS ANIDADOS!!!!
+            for (int i = 0; i < tablerosSolucion; i++) 
             {
                 for (int j = 0; j < 8; j++)
                 {
@@ -291,6 +292,10 @@ namespace TP_LP2
                     this.tablero[i, j] = tableroCopiar.tablero[i, j];
                 }
             }
+        }
+        public static void vaciarLista()
+        {
+            listaTablerosSolucion = new Tablero[] { };
         }
     }
     public struct ArgsTableros
